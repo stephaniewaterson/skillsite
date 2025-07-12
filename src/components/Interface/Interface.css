@@ -1,0 +1,45 @@
+.skills {
+  font-family: "OleoScript";
+}
+
+.skills__box2 {
+  width: 15rem;
+}
+.skills__box1 {
+  margin-right: 5rem;
+  width: 15rem;
+  padding: 0;
+}
+
+.skills__progress {
+  height: 100%;
+  background-color: rgb(237, 69, 86);
+  border-radius: calc(infinity * 1px);
+}
+
+.skills__title {
+  color: white;
+  font-size: 2rem;
+}
+.skills__name {
+  color: white;
+  font-size: 1.25rem;
+}
+
+.skills__bar {
+  height: 1.5rem;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  border-radius: calc(infinity * 1px);
+}
+
+.interface {
+  position: flex;
+  align-items: center;
+  color: white;
+}
+
+.other {
+  animation: fade-in 10s;
+  color: white;
+}

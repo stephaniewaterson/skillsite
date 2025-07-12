@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Playwrite";
+  src: url("../../assets/fonts/Playwrite_RO/static/PlaywriteRO-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OleoScript";
+  src: url("../../assets/fonts/Oleo_Script/OleoScript-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
