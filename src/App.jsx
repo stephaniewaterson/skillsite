@@ -1,9 +1,7 @@
 import "./App.css";
 import { Canvas, useFrame, extend } from "@react-three/fiber";
-import { Suspense, useState, useRef } from "react";
+import { Suspense, useState, useRef, useEffect, useLayoutEffect } from "react";
 import { useErrorBoundary } from "use-error-boundary";
-import { Route } from "wouter";
-import { useSpring } from "@react-spring/core";
 import "./styles/partials/_typography.css";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 
@@ -14,7 +12,6 @@ import {
   Scroll,
 } from "@react-three/drei";
 import { Mac } from "../public/Mac-draco";
-import { a as web } from "@react-spring/web";
 import { easing } from "maath";
 import { useStore } from "../src/components/Store/Store";
 import { Overlay } from "./components/Overlay/Overlay";
@@ -22,6 +19,7 @@ import { SkillsSection } from "./components/Interface/Interface";
 import { Items } from "./components/Projects/Projects";
 import { SpaceMan } from "../public/Outhere_space_buddy";
 import { Html } from "@react-three/drei";
+import gsap from "gsap";
 
 extend({ Overlay });
 extend({ TextGeometry });
@@ -31,7 +29,27 @@ function App({ children }) {
   const [open, setOpen] = useState(false);
   const [hoveredState, setHoveredState] = useState(false);
 
-  const props = useSpring({ open: Number(open) });
+  const mainRef = useRef();
+  const titleRef = useRef();
+
+  useEffect(() => {
+    if (!mainRef.current || !titleRef.current) return;
+
+    gsap.to(mainRef.current, {
+      backgroundColor: open ? "#1b1e22" : "#f0f0f0",
+      duration: 1,
+      ease: "power2.inOut",
+    });
+
+    gsap.to(titleRef.current, {
+      opacity: open ? 0 : 1,
+      y: open ? 50 : 0,
+      duration: 1,
+      ease: "power2.inOut",
+    });
+  }, [open]);
+
+  const hingeRotation = open ? 1.575 : -0.425;
 
   function Selector({ children }) {
     const ref = useRef();
@@ -84,10 +102,9 @@ function App({ children }) {
   }
 
   return (
-    <web.main
-      style={{
-        background: props.open.to([0, 1], ["#f0f0f0", "#1b1e22"]),
-      }}
+    <main
+      ref={mainRef}
+      style={{ height: "100vh", width: "100vw", overflow: "hidden" }}
     >
       <div
         style={{
@@ -96,117 +113,117 @@ function App({ children }) {
           overflow: "hidden",
         }}
       >
-        <web.h1
+        <h1
+          ref={titleRef}
           style={{
-            opacity: props.open.to([0, 1], [1, 0]),
-            transform: props.open.to(
-              (o) => `translate3d(-50%,${o * 50 - 100}px,0)`
-            ),
+            position: "absolute",
+            top: "50px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            color: "#000",
           }}
         >
           Click to open
-        </web.h1>
+        </h1>
 
         <ErrorBoundary>
-          <Route path="/">
-            <Canvas
-              className="flex justify-center items-center h-screen w-screen"
-              camera={{ position: [0, -1.5, 12.5] }}
-              dpr={[1, 3]}
-              gl={{ antialias: false }}
+          <Canvas
+            className="flex justify-center items-center h-screen w-screen"
+            camera={{ position: [0, -1.5, 12.5] }}
+            dpr={[1, 3]}
+            gl={{ antialias: false }}
+          >
+            <ScrollControls
+              horizontal
+              damping={0.9}
+              pages={3.2}
+              // max
+              // speed={0.2}
+              prepend={true}
+              distance={0.5}
             >
-              <ScrollControls
-                horizontal
-                damping={0.9}
-                pages={3.2}
-                // max
-                // speed={0.2}
-                prepend={true}
-                distance={0.5}
-              >
-                <ambientLight />
+              <ambientLight />
 
-                <ContactShadows
-                  resolution={512}
-                  position={[0, -0.8, 0]}
-                  opacity={1}
-                  scale={10}
-                  blur={2}
-                  far={0.8}
-                />
-                <Scroll>
-                  <Suspense fallback={null}>
-                    <group
-                      rotation={[0, 0, 0]}
-                      onClick={(e) => (e.stopPropagation(), setOpen(!open))}
-                      position={[0, 0.5, 0]}
-                    >
-                      <Selector>
-                        <Mac
-                          rotation={[1.65, Math.PI, 1]}
-                          open={open}
-                          hinge={props.open.to([0, 1], [1.575, -0.425])}
-                          onPointerEnter={() => setHoveredState(true)}
-                        />
-                      </Selector>
-                      {open && (
-                        <Html position={[0, 7, 0]}>
-                          <h1 style={{ color: "white" }}>Stephanie Waterson</h1>
-                        </Html>
-                      )}
-                      {hoveredState && open && (
-                        <Overlay
-                          style={{
-                            position: "absolute",
-                            top: "60vh",
-                            left: "0.5em",
-                          }}
-                        />
-                      )}
-                    </group>
-                    <group position={[65, 10, 0]}>
-                      <SkillsSection />
+              <ContactShadows
+                resolution={512}
+                position={[0, -0.8, 0]}
+                opacity={1}
+                scale={10}
+                blur={2}
+                far={0.8}
+              />
+              <Scroll>
+                <Suspense fallback={null}>
+                  <group
+                    rotation={[0, 0, 0]}
+                    onClick={(e) => (e.stopPropagation(), setOpen(!open))}
+                    position={[0, 0.5, 0]}
+                  >
+                    <Selector>
+                      <Mac
+                        rotation={[1.65, Math.PI, 1]}
+                        open={open}
+                        hinge={hingeRotation}
+                        onPointerEnter={() => setHoveredState(true)}
+                      />
+                    </Selector>
+                    {open && (
+                      <Html position={[0, 7, 0]}>
+                        <h1 style={{ color: "white" }}>Stephanie Waterson</h1>
+                      </Html>
+                    )}
+                    {hoveredState && open && (
+                      <Overlay
+                        style={{
+                          position: "absolute",
+                          top: "60vh",
+                          left: "0.5em",
+                        }}
+                      />
+                    )}
+                  </group>
+                  <group position={[65, 10, 0]}>
+                    <SkillsSection />
 
-                      {open && <SpaceMan position={[-15, -15, 2]} scale={6} />}
-                    </group>
-                    <group position={[45, 12, 0]} className="items">
-                      <Items />
-                    </group>
-                    <Html className="Item__title" position={[32, -5, 0]}>
-                      Projects
-                    </Html>
-                    {/* <Html className="Item__title" position={[98, -3, 0]}>
+                    {open && <SpaceMan position={[-15, -15, 2]} scale={6} />}
+                  </group>
+                  <group position={[45, 12, 0]} className="items">
+                    <Items />
+                  </group>
+                  <Html className="Item__title" position={[32, -5, 0]}>
+                    Projects
+                  </Html>
+                  {/* <Html className="Item__title" position={[98, -3, 0]}>
                       Space model and flight game
                     </Html> */}
-                  </Suspense>
-                </Scroll>
+                </Suspense>
+              </Scroll>
 
-                <directionalLight
-                  position={[0, 5, -2]}
-                  scale={[3, 3, 3]}
-                  intensity={Math.PI}
-                  color="#FFFFFF"
-                />
-                <directionalLight
-                  position={[2, 2, 2]}
-                  scale={[3, 3, 3]}
-                  intensity={Math.PI}
-                  color="#FFFFFF"
-                />
+              <directionalLight
+                position={[0, 5, -2]}
+                scale={[3, 3, 3]}
+                intensity={Math.PI}
+                color="#FFFFFF"
+              />
+              <directionalLight
+                position={[2, 2, 2]}
+                scale={[3, 3, 3]}
+                intensity={Math.PI}
+                color="#FFFFFF"
+              />
 
-                <ContactShadows
-                  position={[0, -4.5, 0]}
-                  opacity={0.4}
-                  scale={20}
-                  blur={1.75}
-                  far={4.5}
-                />
-              </ScrollControls>
-            </Canvas>
-          </Route>
+              <ContactShadows
+                position={[0, -4.5, 0]}
+                opacity={0.4}
+                scale={20}
+                blur={1.75}
+                far={4.5}
+              />
+            </ScrollControls>
+          </Canvas>
         </ErrorBoundary>
       </div>
-    </web.main>
+    </main>
   );
 }
 
