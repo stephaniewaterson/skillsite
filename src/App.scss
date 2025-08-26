@@ -1,3 +1,5 @@
+@use "./styles/partials/mixins" as *;
+
 @font-face {
   font-family: "Playwrite";
   src: url("./assets/fonts/Playwrite_RO/static/PlaywriteRO-Regular.ttf")
@@ -6,12 +8,6 @@
   font-style: normal;
 }
 div {
-  /* background: linear-gradient(
-    90deg,
-    rgba(45, 133, 168, 1) 0%,
-    rgba(188, 205, 224, 1) 50%,
-    rgba(222, 222, 222, 1) 100%
-  ); */
   margin: 0;
   border: 0;
 }
@@ -44,11 +40,15 @@ h1 {
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
   font-weight: 400;
-  font-size: 8rem;
+  font-size: 4rem;
   letter-spacing: -0.045em;
   white-space: nowrap;
   color: black;
   font-family: "OleoScript";
+
+  @include tablet {
+    font-size: 8rem;
+  }
 }
 
 @keyframes fade-in {

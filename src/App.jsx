@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import { Suspense, useState, useRef, useEffect, useLayoutEffect } from "react";
 import { useErrorBoundary } from "use-error-boundary";
@@ -31,6 +31,11 @@ function App({ children }) {
 
   const mainRef = useRef();
   const titleRef = useRef();
+
+  const laptopScalingFactor = Math.min(
+    Math.max(window.innerWidth / 1300, 0.6),
+    1
+  );
 
   useEffect(() => {
     if (!mainRef.current || !titleRef.current) return;
@@ -158,6 +163,7 @@ function App({ children }) {
                     rotation={[0, 0, 0]}
                     onClick={(e) => (e.stopPropagation(), setOpen(!open))}
                     position={[0, 0.5, 0]}
+                    scale={laptopScalingFactor}
                   >
                     <Selector>
                       <Mac
@@ -193,9 +199,6 @@ function App({ children }) {
                   <Html className="Item__title" position={[32, -5, 0]}>
                     Projects
                   </Html>
-                  {/* <Html className="Item__title" position={[98, -3, 0]}>
-                      Space model and flight game
-                    </Html> */}
                 </Suspense>
               </Scroll>
 
