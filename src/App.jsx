@@ -117,7 +117,7 @@ function App({ children }) {
           ref={titleRef}
           style={{
             position: "absolute",
-            top: "50px",
+            top: "15rem",
             left: "50%",
             transform: "translateX(-50%)",
             color: "#000",
@@ -135,7 +135,7 @@ function App({ children }) {
           >
             <ScrollControls
               horizontal
-              damping={0.9}
+              damping={0.2}
               pages={3.2}
               // max
               // speed={0.2}

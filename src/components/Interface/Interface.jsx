@@ -30,19 +30,19 @@ const Section = (props) => {
 const skills = [
   {
     title: "React / React Native",
-    level: 80,
+    level: 70,
   },
   {
     title: "Nodejs",
-    level: 80,
+    level: 70,
   },
   {
     title: "Threejs / React Three Fiber",
-    level: 60,
+    level: 50,
   },
   {
     title: "Typescript",
-    level: 60,
+    level: 30,
   },
 
   {
