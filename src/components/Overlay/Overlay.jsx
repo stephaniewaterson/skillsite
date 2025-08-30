@@ -2,7 +2,7 @@ import { Children } from "react";
 import { motion } from "framer-motion";
 import { useStore } from "../Store/Store";
 import { Html } from "@react-three/drei";
-import "./Overlay.css";
+import "./Overlay.scss";
 import { Mouse } from "lucide-react";
 
 const container = {

@@ -61,7 +61,7 @@ const languages = [
   },
   {
     title: "🇱🇧 Arabic",
-    level: 25,
+    level: 30,
   },
 ];
 

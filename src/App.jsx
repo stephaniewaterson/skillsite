@@ -33,7 +33,7 @@ function App({ children }) {
   const titleRef = useRef();
 
   const laptopScalingFactor = Math.min(
-    Math.max(window.innerWidth / 1300, 0.6),
+    Math.max(window.innerWidth / 1100, 0.8),
     1
   );
 
@@ -142,8 +142,6 @@ function App({ children }) {
               horizontal
               damping={0.2}
               pages={3.2}
-              // max
-              // speed={0.2}
               prepend={true}
               distance={0.5}
             >
@@ -185,6 +183,7 @@ function App({ children }) {
                           top: "60vh",
                           left: "0.5em",
                         }}
+                        className="overlay"
                       />
                     )}
                   </group>
