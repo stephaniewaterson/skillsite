@@ -77,7 +77,7 @@ export const SkillsSection = () => {
   const isMobile = size.width <= 767;
 
   const position = isMobile ? [-15, 0, 0] : [-9, 0, 0]; // shift left on mobile
-  const scale = isMobile ? 0.8 : 1;
+  const scale = isMobile ? 0.7 : 1;
   return (
     <>
       <Html className="skills" position={position} scale={scale}>
