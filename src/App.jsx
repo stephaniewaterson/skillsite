@@ -4,6 +4,7 @@ import { Suspense, useState, useRef, useEffect, useLayoutEffect } from "react";
 import { useErrorBoundary } from "use-error-boundary";
 import "./styles/partials/_typography.css";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
+import { useThree } from "@react-three/fiber";
 
 import {
   ContactShadows,
@@ -31,6 +32,29 @@ function App({ children }) {
 
   const mainRef = useRef();
   const titleRef = useRef();
+
+  function ResponsiveItems() {
+    const { size } = useThree();
+
+    function getResponsiveValue(mobile, tablet, desktop) {
+      if (size.width <= 767) return mobile; // mobile
+      if (size.width <= 1217) return tablet; // tablet (adjusted!)
+
+      return desktop; // desktop
+    }
+
+    const position = getResponsiveValue(
+      [10, 6, 0], // mobile position
+      [25, 10, 0], // tablet position
+      [45, 12, 0] // desktop position (your original)
+    );
+
+    return (
+      <group position={position} className="items">
+        <Items />
+      </group>
+    );
+  }
 
   const laptopScalingFactor = Math.min(
     Math.max(window.innerWidth / 1100, 0.8),
@@ -192,9 +216,8 @@ function App({ children }) {
 
                     {open && <SpaceMan position={[-15, -15, 2]} scale={6} />}
                   </group>
-                  <group position={[45, 12, 0]} className="items">
-                    <Items />
-                  </group>
+                  <ResponsiveItems />
+
                   <Html className="Item__title" position={[32, -5, 0]}>
                     Projects
                   </Html>

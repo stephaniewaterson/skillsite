@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-
+import { useThree } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import "./Interface.css";
 import { useState } from "react";
@@ -72,9 +72,15 @@ export const Interface = () => {
 };
 
 export const SkillsSection = () => {
+  const { size } = useThree();
+
+  const isMobile = size.width <= 767;
+
+  const position = isMobile ? [-15, 0, 0] : [-9, 0, 0]; // shift left on mobile
+  const scale = isMobile ? 0.8 : 1;
   return (
     <>
-      <Html className="skills" position={[-9, 0, 0]}>
+      <Html className="skills" position={position} scale={scale}>
         <Section className="skills__section">
           <motion.div
             className="skills__div"
