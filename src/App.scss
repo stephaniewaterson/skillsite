@@ -60,6 +60,23 @@ h1 {
   }
 }
 
+/* Hide Drei's scroll container when closed */
+.closed .scroll {
+  overflow: hidden !important;
+  pointer-events: none; // prevent accidental dragging
+}
+
+/* Restore normal scrolling when open */
+.open .scroll {
+  overflow: auto !important;
+  pointer-events: auto;
+}
+
+/* Optional: remove scrollbars visually */
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
 .image {
   width: 20rem;
   height: 20rem;

@@ -133,6 +133,7 @@ function App({ children }) {
   return (
     <main
       ref={mainRef}
+      className={open ? "open" : "closed"}
       style={{ height: "100vh", width: "100vw", overflow: "hidden" }}
     >
       <div
@@ -163,11 +164,13 @@ function App({ children }) {
             gl={{ antialias: false }}
           >
             <ScrollControls
+              enabled={open}
               horizontal
               damping={0.2}
               pages={3.2}
               prepend={true}
               distance={0.5}
+              className="scroll"
             >
               <ambientLight />
 
