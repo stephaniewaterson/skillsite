@@ -19,7 +19,7 @@ import { Overlay } from "./components/Overlay/Overlay";
 import { SkillsSection } from "./components/Interface/Interface";
 import { Items } from "./components/Projects/Projects";
 import { SpaceMan } from "../public/Outhere_space_buddy";
-import { Html } from "@react-three/drei";
+import { Html, useProgress } from "@react-three/drei";
 import gsap from "gsap";
 
 extend({ Overlay });
@@ -79,6 +79,34 @@ function App({ children }) {
   }, [open]);
 
   const hingeRotation = open ? 1.575 : -0.425;
+
+  function LoaderOverlay() {
+    const { progress } = useProgress();
+
+    if (progress === 100) return null; // hide when finished
+
+    return (
+      <div
+        style={{
+          background: "#1b1e22",
+          color: "white",
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 9999,
+        }}
+      >
+        <h2>Loading...</h2>
+        <p>{Math.floor(progress)}%</p>
+      </div>
+    );
+  }
 
   function Selector({ children }) {
     const ref = useRef();
@@ -155,7 +183,7 @@ function App({ children }) {
         >
           Click to open
         </h1>
-
+        <LoaderOverlay />
         <ErrorBoundary>
           <Canvas
             className="flex justify-center items-center h-screen w-screen"
@@ -183,7 +211,7 @@ function App({ children }) {
                 far={0.8}
               />
               <Scroll>
-                <Suspense fallback={null}>
+                <Suspense>
                   <group
                     rotation={[0, 0, 0]}
                     onClick={(e) => (e.stopPropagation(), setOpen(!open))}
