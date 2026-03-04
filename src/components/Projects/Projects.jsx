@@ -1,171 +1,276 @@
-// import { Html } from "@react-three/drei";
-// import "./Projects.css";
-// import * as THREE from "three";
-// import { useRef, useState, useEffect } from "react";
-// import { useFrame, useThree } from "@react-three/fiber";
-// import { useIntersect, Image, ScrollControls, Scroll } from "@react-three/drei";
+import { Html } from "@react-three/drei";
+import { motion } from "framer-motion";
 
-// function Item({ url, scale, ...props }) {
-//   const visible = useRef(false);
-//   const [hovered, hover] = useState(false);
-//   const ref = useIntersect((isVisible) => (visible.current = isVisible));
-//   const { height } = useThree((state) => state.viewport);
-
-//   useFrame((state, delta) => {
-//     ref.current.position.y = THREE.MathUtils.damp(
-//       ref.current.position.y,
-//       visible.current ? 0 : -height / 2 + 1,
-//       4,
-//       delta
-//     );
-//     ref.current.material.zoom = THREE.MathUtils.damp(
-//       ref.current.material.zoom,
-//       visible.current ? 1 : 1.5,
-//       4,
-//       delta
-//     );
-//     ref.current.material.grayscale = THREE.MathUtils.damp(
-//       ref.current.material.grayscale,
-//       hovered ? 1 : 0,
-//       4,
-//       delta
-//     );
-//   });
-//   return (
-//     <group {...props}>
-//       <Image
-//         ref={ref}
-//         onPointerOver={() => hover(true)}
-//         onPointerOut={() => hover(false)}
-//         scale={scale}
-//         url={url}
-//       />
-//     </group>
-//   );
-// }
-
-// export function Items() {
-//   function AddLink() {
-//     window.location.replace("https://locallingo.netlify.app/");
-//   }
-
-//   const { width: w, height: h } = useThree((state) => state.viewport);
-//   return (
-//     <Scroll>
-//       <Item
-//         url="/images/2.png"
-//         scale={[w / 2.5, w / 3.5, 2]}
-//         position={[-w / 4, -h * 0.5, 0]}
-//         onClick={(e) => {
-//           window.open("https://locallingo.netlify.app/");
-//         }}
-//       />
-
-//       <Item
-//         url="/images/4.png"
-//         scale={[w / 2.5, w / 3.5, 1]}
-//         position={[w / 4, -h * 0.5, 0]}
-//         onClick={(e) => {
-//           window.open("https://spaceflight.netlify.app/");
-//         }}
-//       />
-//     </Scroll>
-//   );
-// }
-
-import { useRef, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useIntersect, Image, Scroll } from "@react-three/drei";
-import * as THREE from "three";
-
-// Helper hook to pick values per screen size
-function useResponsiveValue(mobile, tablet, desktop) {
-  const { size } = useThree();
-  if (size.width <= 767) return mobile; // mobile
-  if (size.width <= 1280) return tablet; // tablet
-  return desktop; // desktop
-}
-
-function Item({ url, scale, ...props }) {
-  const visible = useRef(false);
-  const [hovered, hover] = useState(false);
-  const ref = useIntersect((isVisible) => (visible.current = isVisible));
-  const { height } = useThree((state) => state.viewport);
-
-  useFrame((state, delta) => {
-    if (!ref.current) return;
-
-    // Animate Y position in/out of view
-    ref.current.position.y = THREE.MathUtils.damp(
-      ref.current.position.y,
-      visible.current ? 0 : -height / 2 + 1,
-      4,
-      delta
-    );
-
-    // Zoom effect when visible
-    ref.current.material.zoom = THREE.MathUtils.damp(
-      ref.current.material.zoom,
-      visible.current ? 1 : 1.5,
-      4,
-      delta
-    );
-
-    // Grayscale on hover
-    ref.current.material.grayscale = THREE.MathUtils.damp(
-      ref.current.material.grayscale,
-      hovered ? 1 : 0,
-      4,
-      delta
-    );
-  });
-
-  return (
-    <group {...props}>
-      <Image
-        ref={ref}
-        onPointerOver={() => hover(true)}
-        onPointerOut={() => hover(false)}
-        scale={scale}
-        url={url}
-      />
-    </group>
-  );
-}
+const projects = [
+  {
+    img: "/images/2.png",
+    title: "LocalLingo",
+    desc: "Language learning platform with country-based matching, multi-language chat, and Spanish, Arabic, and Malay support.",
+    tags: ["React", "Node.js", "MySQL"],
+    link: "https://locallingo.netlify.app/",
+    featured: true,
+  },
+  {
+    img: "/images/4.png",
+    title: "3D Racing Game",
+    tags: ["Three.js", "WebGL", "R3F"],
+    link: "https://spaceflight.netlify.app/",
+  },
+  {
+    img: "/images/2.png",
+    title: "This Portfolio",
+    tags: ["R3F", "Drei", "React Spring"],
+    link: "#",
+  },
+];
 
 export function Items() {
-  const { width: w, height: h } = useThree((state) => state.viewport);
-
-  // Responsive scales
-  const itemScale = useResponsiveValue(
-    [w / 1.2, w / 2, 2], // mobile
-    [w / 2, w / 3, 2], // tablet
-    [w / 2.5, w / 3.5, 2] // desktop
-  );
+  const featured = projects.find((p) => p.featured);
+  const rest = projects.filter((p) => !p.featured);
 
   return (
-    <Scroll>
-      <Item
-        url="/images/2.png"
-        scale={itemScale}
-        position={useResponsiveValue(
-          [10, -h * 0.4, 0], // mobile
-          [-w / 8, -h * 0.45, 0], // tablet
-          [-w / 4, -h * 0.5, 0] // desktop
-        )}
-        onClick={() => window.open("https://locallingo.netlify.app/")}
-      />
+    <Html
+      position={[0, 0, 0]}
+      transform={false}
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "0 8vw",
+        pointerEvents: "none",
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        style={{ maxWidth: "55vw" }}
+      >
+        {/* Title */}
+        <h2
+          style={{
+            fontFamily: "'Dela Gothic One', sans-serif",
+            fontSize: "clamp(2.5rem, 5vw, 4rem)",
+            color: "#f0f0f0",
+            marginBottom: "0.75rem",
+            paddingBottom: "1rem",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          Projects
+        </h2>
 
-      <Item
-        url="/images/4.png"
-        scale={itemScale}
-        position={useResponsiveValue(
-          [10, -h * 0.1, 0], // mobile
-          [w / 2, -h * 0.45, 0], // tablet
-          [w / 4, -h * 0.5, 0] // desktop
-        )}
-        onClick={() => window.open("https://spaceflight.netlify.app/")}
-      />
-    </Scroll>
+        {/* Layout */}
+        <div
+          style={{
+            display: "flex",
+            gap: "2rem",
+            alignItems: "flex-start",
+            marginTop: "1.5rem",
+          }}
+        >
+          {/* Featured card */}
+          <div
+            style={{
+              flex: "1.4",
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(232,69,60,0.25)",
+              borderRadius: "16px",
+              overflow: "hidden",
+              cursor: "pointer",
+            }}
+            onClick={() => window.open(featured.link)}
+          >
+            <img
+              src={featured.img}
+              alt={featured.title}
+              style={{
+                width: "100%",
+                height: "200px",
+                objectFit: "cover",
+                display: "block",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+              }}
+            />
+            <div style={{ padding: "1.5rem" }}>
+              <h3
+                style={{
+                  fontFamily: "'Dela Gothic One', sans-serif",
+                  fontSize: "1.4rem",
+                  color: "#f0f0f0",
+                  marginBottom: "0.6rem",
+                }}
+              >
+                {featured.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: "0.85rem",
+                  color: "#888",
+                  lineHeight: "1.7",
+                  marginBottom: "1rem",
+                }}
+              >
+                {featured.desc}
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.4rem",
+                  flexWrap: "wrap",
+                  marginBottom: "1.2rem",
+                }}
+              >
+                {featured.tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    style={{
+                      fontSize: "0.7rem",
+                      padding: "0.2rem 0.6rem",
+                      borderRadius: "4px",
+                      background: "rgba(232,69,60,0.12)",
+                      color: "#e8453c",
+                      border: "1px solid rgba(232,69,60,0.25)",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(featured.link);
+                }}
+                style={{
+                  padding: "0.5rem 1.2rem",
+                  border: "1px solid #e8453c",
+                  borderRadius: "6px",
+                  background: "transparent",
+                  color: "#e8453c",
+                  fontSize: "0.8rem",
+                  cursor: "pointer",
+                  fontFamily: "'DM Sans', sans-serif",
+                }}
+              >
+                View project →
+              </button>
+            </div>
+          </div>
+
+          {/* Sidebar list */}
+          <div
+            style={{
+              flex: "1",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.8rem",
+            }}
+          >
+            {rest.map((p, i) => (
+              <div
+                key={i}
+                onClick={() => p.link !== "#" && window.open(p.link)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1rem",
+                  padding: "1rem 1.2rem",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "12px",
+                  cursor: p.link !== "#" ? "pointer" : "default",
+                  transition: "background 0.15s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = "rgba(255,255,255,0.07)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "rgba(255,255,255,0.03)")
+                }
+              >
+                <img
+                  src={p.img}
+                  alt={p.title}
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "10px",
+                    objectFit: "cover",
+                    flexShrink: 0,
+                  }}
+                />
+                <div>
+                  <div
+                    style={{
+                      fontSize: "0.9rem",
+                      fontWeight: "600",
+                      color: "#f0f0f0",
+                      marginBottom: "0.2rem",
+                      fontFamily: "'DM Sans', sans-serif",
+                    }}
+                  >
+                    {p.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.72rem",
+                      color: "#666",
+                    }}
+                  >
+                    {p.tags.join(" · ")}
+                  </div>
+                </div>
+                <span
+                  style={{
+                    marginLeft: "auto",
+                    color: "#555",
+                    fontSize: "1rem",
+                  }}
+                >
+                  →
+                </span>
+              </div>
+            ))}
+
+            {/* Coming soon */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1rem",
+                padding: "1rem 1.2rem",
+                border: "1px dashed rgba(255,255,255,0.08)",
+                borderRadius: "12px",
+                opacity: 0.4,
+              }}
+            >
+              <div
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "10px",
+                  border: "1px dashed rgba(255,255,255,0.15)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  padding: "4vh 8vw",
+                  color: "#555",
+                  fontSize: "1.2rem",
+                  flexShrink: 0,
+                }}
+              >
+                +
+              </div>
+              <div style={{ fontSize: "0.85rem", color: "#555" }}>
+                More coming soon
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </Html>
   );
 }

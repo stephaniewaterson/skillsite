@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useThree } from "@react-three/fiber";
+
 import { Html } from "@react-three/drei";
 import "./Interface.css";
 import { useState } from "react";
@@ -30,19 +30,19 @@ const Section = (props) => {
 const skills = [
   {
     title: "React / React Native",
-    level: 70,
+    level: 80,
   },
   {
     title: "Nodejs",
-    level: 70,
+    level: 80,
   },
   {
     title: "Threejs / React Three Fiber",
-    level: 50,
+    level: 60,
   },
   {
     title: "Typescript",
-    level: 30,
+    level: 60,
   },
 
   {
@@ -61,7 +61,7 @@ const languages = [
   },
   {
     title: "🇱🇧 Arabic",
-    level: 30,
+    level: 25,
   },
 ];
 
@@ -72,20 +72,41 @@ export const Interface = () => {
 };
 
 export const SkillsSection = () => {
-  const { size } = useThree();
-
-  const isMobile = size.width <= 767;
-
-  const position = isMobile ? [-15, 0, 0] : [-9, 0, 0]; // shift left on mobile
-  const scale = isMobile ? 0.7 : 1;
   return (
     <>
-      <Html className="skills" position={position} scale={scale}>
+      <Html
+        className="skills"
+        position={[-9, 0, 0]}
+        transform={false}
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          padding: "0 8vw",
+          pointerEvents: "none",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            gap: "8vw",
+            pointerEvents: "all", // ← re-enable on content only
+          }}
+        ></div>
         <Section className="skills__section">
           <motion.div
             className="skills__div"
             whileInView={"visible"}
             animate={{ display: "flex" }}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "8vw",
+              alignItems: "flex-start",
+              width: "100%",
+            }}
           >
             <div className="skills__box1">
               <h2 className="skills__title">Skills</h2>
@@ -93,36 +114,29 @@ export const SkillsSection = () => {
                 {skills.map((skill, index) => (
                   <div className="skills__name" key={index}>
                     <motion.h3
-                      initial={{
-                        opacity: 0,
-                      }}
+                      initial={{ opacity: 0 }}
                       variants={{
                         visible: {
                           opacity: 1,
-                          transition: {
-                            duration: 1,
-                            delay: 1 + index * 0.2,
-                          },
+                          transition: { duration: 1, delay: 1 + index * 0.2 },
                         },
                       }}
                     >
                       {skill.title}
+                      <span className="skills__percent">
+                        {skill.level}%
+                      </span>{" "}
+                      {/* ← ADD */}
                     </motion.h3>
                     <div className="skills__bar">
                       <motion.div
                         className="skills__progress"
                         style={{ width: `${skill.level}%` }}
-                        initial={{
-                          scaleX: 0,
-                          originX: 0,
-                        }}
+                        initial={{ scaleX: 0, originX: 0 }}
                         variants={{
                           visible: {
                             scaleX: 1,
-                            transition: {
-                              duration: 1,
-                              delay: 1 + index * 0.2,
-                            },
+                            transition: { duration: 1, delay: 1 + index * 0.2 },
                           },
                         }}
                       />
@@ -130,58 +144,45 @@ export const SkillsSection = () => {
                   </div>
                 ))}
               </div>
+              <p className="other">
+                Also: MySQL · REST APIs · Agile · OAuth · GitHub · Salsa Dancing
+                💃
+              </p>
             </div>
-            <div>
-              <div className="skills_box2">
-                <h2 className="skills__title">Languages</h2>
-                <div>
-                  {languages.map((lng, index) => (
-                    <div className="skills__name" key={index}>
-                      <motion.h3
-                        initial={{
-                          opacity: 0,
-                        }}
-                        variants={{
-                          visible: {
-                            opacity: 1,
-                            transition: {
-                              duration: 1,
-                              delay: 2 + index * 0.2,
-                            },
-                          },
-                        }}
-                      >
-                        {lng.title}
-                      </motion.h3>
-                      <div className="skills__bar">
-                        <motion.div
-                          className="skills__progress"
-                          style={{ width: `${lng.level}%` }}
-                          initial={{
-                            scaleX: 0,
-                            originX: 0,
-                          }}
-                          variants={{
-                            visible: {
-                              scaleX: 1,
-                              transition: {
-                                duration: 1,
-                                delay: 2 + index * 0.2,
-                              },
-                            },
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
+
+            <div className="skills_box2">
+              <h2 className="skills__title">Languages</h2>
+              <div className="lang__grid">
+                {" "}
+                {/* ← CHANGE: was plain <div> */}
+                {languages.map((lng, index) => (
+                  <div className="lang__pill" key={index}>
+                    {" "}
+                    {/* ← CHANGE: was skills__name div */}
+                    <motion.span
+                      className="lang__name"
+                      initial={{ opacity: 0 }}
+                      variants={{
+                        visible: {
+                          opacity: 1,
+                          transition: { duration: 1, delay: 2 + index * 0.2 },
+                        },
+                      }}
+                    >
+                      {lng.title}
+                    </motion.span>
+                    <span className="lang__level">
+                      {lng.level === 100
+                        ? "Native"
+                        : lng.level >= 80
+                        ? "Fluent"
+                        : "Conversational"}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
-          <h3 className="other">
-            Other: MySQL, REST APIs, Agile Development, User Authentication,
-            OAuth, GitHub, Salsa Dancing.
-          </h3>
         </Section>
       </Html>
     </>
