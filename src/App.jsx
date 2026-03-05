@@ -51,17 +51,38 @@ const navBtnStyles = {
   fontFamily: "inherit",
 };
 
-function ScrollJumper({ targetPage, onDone }) {
+function ScrollJumper({ targetRef, onDone }) {
   const scroll = useScroll();
+  const { size, camera } = useThree();
+  const destRef = useRef(null);
 
   useFrame(() => {
-    if (targetPage === null) return;
     const el = scroll.el;
     if (!el) return;
-    const totalWidth = el.scrollWidth - el.clientWidth;
-    const dest = (targetPage / 3) * totalWidth;
-    el.scrollLeft = dest;
-    onDone();
+
+    const camZ = camera.position.z;
+    if (!camZ) return;
+
+    const vFov = (camera.fov * Math.PI) / 180;
+    const worldHeight = 2 * Math.tan(vFov / 2) * camZ;
+    const worldWidth = worldHeight * (size.width / size.height);
+    const pixelsPerUnit = size.width / worldWidth;
+
+    // When a new target comes in, calculate dest in pixels
+    if (targetRef.current !== null) {
+      destRef.current = targetRef.current * pixelsPerUnit;
+      targetRef.current = null;
+    }
+
+    // Lerp towards dest
+    if (destRef.current !== null) {
+      el.scrollLeft += (destRef.current - el.scrollLeft) * 0.08;
+      if (Math.abs(destRef.current - el.scrollLeft) < 1) {
+        el.scrollLeft = destRef.current;
+        destRef.current = null;
+        onDone();
+      }
+    }
   });
 
   return null;
@@ -71,12 +92,23 @@ function App({ children }) {
   const { ErrorBoundary, didCatch, error } = useErrorBoundary();
   const [open, setOpen] = useState(false);
   const [hoveredState, setHoveredState] = useState(false);
-  const [scrollTarget, setScrollTarget] = useState(null);
+  const scrollTargetRef = useRef(null);
 
   const mainRef = useRef();
   const titleRef = useRef();
 
   const [scrollReady, setScrollReady] = useState(false);
+
+  const isMobile = window.innerWidth <= 767;
+  const isTablet = window.innerWidth <= 1217;
+
+  // 3D world positions (where content sits visually)
+  const projectsX = isMobile ? 18 : isTablet ? 15 : 35;
+  const skillsX = isMobile ? 32 : isTablet ? 48 : 55;
+
+  // Jump targets (where buttons scroll to) — tune these independently
+  const projectsJumpX = isMobile ? 18 : isTablet ? 15 : 20;
+  const skillsJumpX = isMobile ? 32 : isTablet ? 48 : 55;
 
   useEffect(() => {
     if (open) {
@@ -89,16 +121,8 @@ function App({ children }) {
   }, [open]);
 
   function ResponsiveItems() {
-    const { size } = useThree();
-
-    function getResponsiveValue(mobile, tablet, desktop) {
-      if (size.width <= 767) return mobile;
-      if (size.width <= 1217) return tablet;
-      return desktop;
-    }
-
     return (
-      <group position={[50, 12, 0]} className="items">
+      <group position={[projectsX, isMobile ? 6 : 12, 0]} className="items">
         <Items />
       </group>
     );
@@ -232,9 +256,9 @@ function App({ children }) {
         {open && scrollReady && (
           <nav style={navStyles}>
             {[
-              { label: "Projects", page: 1 },
-              { label: "Skills", page: 3 },
-            ].map(({ label, page }) => (
+              { label: "Projects", worldX: projectsJumpX },
+              { label: "Skills", worldX: skillsJumpX },
+            ].map(({ label, worldX }) => (
               <button
                 key={label}
                 style={navBtnStyles}
@@ -246,7 +270,9 @@ function App({ children }) {
                   e.currentTarget.style.background = "rgba(255,255,255,0.12)";
                   e.currentTarget.style.transform = "scale(1)";
                 }}
-                onClick={() => setScrollTarget(page)}
+                onClick={() => {
+                  scrollTargetRef.current = worldX;
+                }}
               >
                 {label}
               </button>
@@ -264,15 +290,12 @@ function App({ children }) {
             <ScrollControls
               horizontal
               damping={0}
-              pages={open ? 3 : 0}
+              pages={open ? 4 : 0}
               prepend={true}
               distance={0.5}
             >
-              {scrollTarget !== null && scrollReady && (
-                <ScrollJumper
-                  targetPage={scrollTarget}
-                  onDone={() => setScrollTarget(null)}
-                />
+              {scrollReady && (
+                <ScrollJumper targetRef={scrollTargetRef} onDone={() => {}} />
               )}
 
               <ambientLight />
@@ -285,7 +308,6 @@ function App({ children }) {
                 blur={2}
                 far={0.8}
               />
-
               <Scroll>
                 <Suspense>
                   {/* Laptop */}
@@ -321,9 +343,9 @@ function App({ children }) {
                   </group>
 
                   {/* Skills */}
-                  <group position={[80, 10, 0]}>
+                  <group position={[skillsX, 10, 0]}>
                     <SkillsSection />
-                    {open && <SpaceMan position={[-15, -13, 3]} scale={5} />}
+                    {open && <SpaceMan position={[15, -15, 0]} scale={6} />}
                   </group>
 
                   {/* Projects — responsive */}
