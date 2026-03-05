@@ -77,10 +77,7 @@ export const SkillsSection = () => {
       <Html
         className="skills"
         position={[-9, 0, 0]}
-        transform={false}
         style={{
-          width: "100vw",
-          height: "100vh",
           display: "flex",
           alignItems: "center",
           padding: "0 8vw",
@@ -89,7 +86,7 @@ export const SkillsSection = () => {
       >
         <div
           style={{
-            width: "100%",
+            width: "90vw",
             display: "flex",
             gap: "8vw",
             pointerEvents: "all", // ← re-enable on content only

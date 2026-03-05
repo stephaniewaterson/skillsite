@@ -26,7 +26,6 @@ import gsap from "gsap";
 extend({ Overlay });
 extend({ TextGeometry });
 
-// ── Nav styles ────────────────────────────────────────────────────────────
 const navStyles = {
   position: "fixed",
   bottom: "2rem",
@@ -52,7 +51,6 @@ const navBtnStyles = {
   fontFamily: "inherit",
 };
 
-// ── ScrollJumper — instant snap, always lands correctly ───────────────────
 function ScrollJumper({ targetPage, onDone }) {
   const scroll = useScroll();
 
@@ -61,7 +59,7 @@ function ScrollJumper({ targetPage, onDone }) {
     const el = scroll.el;
     if (!el) return;
     const totalWidth = el.scrollWidth - el.clientWidth;
-    const dest = (targetPage / 2) * totalWidth;
+    const dest = (targetPage / 3) * totalWidth;
     el.scrollLeft = dest;
     onDone();
   });
@@ -78,6 +76,18 @@ function App({ children }) {
   const mainRef = useRef();
   const titleRef = useRef();
 
+  const [scrollReady, setScrollReady] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      // Wait for ScrollControls to resize before allowing jumps
+      const timer = setTimeout(() => setScrollReady(true), 300);
+      return () => clearTimeout(timer);
+    } else {
+      setScrollReady(false);
+    }
+  }, [open]);
+
   function ResponsiveItems() {
     const { size } = useThree();
 
@@ -88,7 +98,7 @@ function App({ children }) {
     }
 
     return (
-      <group position={[40, 12, 0]} className="items">
+      <group position={[50, 12, 0]} className="items">
         <Items />
       </group>
     );
@@ -219,11 +229,11 @@ function App({ children }) {
         <LoaderOverlay />
 
         {/* Nav — only visible when laptop is open */}
-        {open && (
+        {open && scrollReady && (
           <nav style={navStyles}>
             {[
-              { label: "Projects", page: 0.9 },
-              { label: "Skills", page: 2 },
+              { label: "Projects", page: 1 },
+              { label: "Skills", page: 3 },
             ].map(({ label, page }) => (
               <button
                 key={label}
@@ -254,11 +264,11 @@ function App({ children }) {
             <ScrollControls
               horizontal
               damping={0}
-              pages={open ? 2 : 0}
+              pages={open ? 3 : 0}
               prepend={true}
               distance={0.5}
             >
-              {scrollTarget !== null && (
+              {scrollTarget !== null && scrollReady && (
                 <ScrollJumper
                   targetPage={scrollTarget}
                   onDone={() => setScrollTarget(null)}
@@ -311,9 +321,9 @@ function App({ children }) {
                   </group>
 
                   {/* Skills */}
-                  <group position={[65, 10, 0]}>
+                  <group position={[80, 10, 0]}>
                     <SkillsSection />
-                    {open && <SpaceMan position={[-22, -18, 0]} scale={5} />}
+                    {open && <SpaceMan position={[-15, -13, 3]} scale={5} />}
                   </group>
 
                   {/* Projects — responsive */}

@@ -31,7 +31,6 @@ export function Items() {
   return (
     <Html
       position={[0, 0, 0]}
-      transform={false}
       style={{
         width: "100vw",
         height: "100vh",
