@@ -86,6 +86,44 @@ function ScrollJumper({ targetRef, onDone }) {
   return null;
 }
 
+const isMobile = window.innerWidth <= 767;
+const isTablet = window.innerWidth <= 1217;
+
+const layout = isMobile
+  ? {
+      projectsX: 14.5,
+      projectsJump: 10,
+      skillsX: 32,
+      skillsJump: 34,
+      projectsY: 6,
+      skillsY: 8,
+      showSpaceMan: false,
+    }
+  : isTablet
+  ? {
+      projectsX: 25,
+      projectsJump: 14,
+      skillsX: 44,
+      skillsJump: 38,
+      projectsY: 12,
+      skillsY: 10,
+      showSpaceMan: false,
+    }
+  : {
+      projectsX: 35,
+      projectsJump: 20,
+      skillsX: 80,
+      skillsJump: 40,
+      projectsY: 12,
+      skillsY: 10,
+      showSpaceMan: true,
+    };
+const projectsX = layout.projectsX;
+const skillsX = layout.skillsX;
+
+const projectsJumpX = layout.projectsJump;
+const skillsJumpX = layout.skillsJump;
+
 function App({ children }) {
   const { ErrorBoundary, didCatch, error } = useErrorBoundary();
   const [open, setOpen] = useState(false);
@@ -96,24 +134,6 @@ function App({ children }) {
   const titleRef = useRef();
 
   const [scrollReady, setScrollReady] = useState(false);
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const onResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  const isMobile = width <= 767;
-  const isTablet = width <= 1217;
-
-  // 3D world positions (where content sits visually)
-  const projectsX = isMobile ? 18 : isTablet ? 15 : 35;
-  const skillsX = isMobile ? 32 : isTablet ? 48 : 55;
-
-  // Jump targets (where buttons scroll to) — tune these independently
-  const projectsJumpX = isMobile ? 18 : isTablet ? 15 : 20;
-  const skillsJumpX = isMobile ? 32 : isTablet ? 48 : 55;
 
   useEffect(() => {
     if (open) {
@@ -127,12 +147,14 @@ function App({ children }) {
 
   function ResponsiveItems() {
     return (
-      <group position={[projectsX, isMobile ? 6 : 12, 0]} className="items">
+      <group
+        position={[layout.projectsX, layout.projectsY, 0]}
+        className="items"
+      >
         <Items />
       </group>
     );
   }
-
   const laptopScalingFactor = Math.min(
     Math.max(window.innerWidth / 1100, 0.8),
     1
@@ -300,7 +322,7 @@ function App({ children }) {
               <ScrollControls
                 horizontal
                 damping={0}
-                pages={open ? 4 : 1}
+                pages={open ? 4.25 : 1}
                 prepend={true}
                 distance={0.5}
               >
@@ -353,11 +375,12 @@ function App({ children }) {
                     </group>
 
                     {/* Skills */}
-                    <group position={[skillsX, 10, 0]}>
+                    <group position={[layout.skillsX, layout.skillsY, 0]}>
                       <SkillsSection />
-                      {open && <SpaceMan position={[15, -15, 0]} scale={6} />}
+                      {layout.showSpaceMan && open && (
+                        <SpaceMan position={[-13, -16, 0]} scale={6} />
+                      )}
                     </group>
-
                     {/* Projects — responsive */}
                     <ResponsiveItems />
                   </Suspense>
