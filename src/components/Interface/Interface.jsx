@@ -62,7 +62,7 @@ export const SkillsSection = () => {
         padding: isMobile ? "0 6vw" : "0 8vw",
 
         width: "100vw",
-        overflowY: isMobile ? "auto" : "visible", 
+        overflowY: isMobile ? "auto" : "visible",
         pointerEvents: "all",
       }}
     >
@@ -137,32 +137,62 @@ export const SkillsSection = () => {
           >
             <h2 className="skills__title">Languages</h2>
 
-            <div className="lang__grid">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: isMobile ? "row" : "column",
+                gap: isMobile ? "0.5rem" : "1.2rem",
+                flexWrap: isMobile ? "wrap" : "nowrap",
+              }}
+            >
               {languages.map((lng, index) => (
-                <div className="lang__pill" key={index}>
+                <div
+                  className="lang__pill"
+                  key={index}
+                  style={
+                    isMobile
+                      ? {
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: "0.5rem 0.8rem",
+                          minWidth: "auto",
+                          flex: "1",
+                          gap: "0.2rem",
+                        }
+                      : {}
+                  }
+                >
                   <motion.span
                     className="lang__name"
+                    style={isMobile ? { fontSize: "0.8rem" } : {}}
                     initial={{ opacity: 0 }}
                     variants={{
                       visible: {
                         opacity: 1,
-                        transition: {
-                          duration: 1,
-                          delay: 2 + index * 0.2,
-                        },
+                        transition: { duration: 1, delay: 2 + index * 0.2 },
                       },
                     }}
                   >
                     {lng.title}
                   </motion.span>
-
-                  <span className="lang__level">
+                  <motion.span
+                    className="lang__level"
+                    style={isMobile ? { fontSize: "0.65rem" } : {}}
+                    initial={{ opacity: 0 }}
+                    variants={{
+                      visible: {
+                        opacity: 1,
+                        transition: { duration: 1, delay: 2 + index * 0.2 },
+                      },
+                    }}
+                  >
                     {lng.level === 100
                       ? "Native"
                       : lng.level >= 80
                       ? "Fluent"
                       : "Conversational"}
-                  </span>
+                  </motion.span>
                 </div>
               ))}
             </div>

@@ -42,12 +42,12 @@ export function Items() {
       position={[0, isMobile ? 6 : 0, 0]}
       style={{
         width: "100vw",
-        height: "100vh",
+        height: isMobile ? "auto" : "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
         paddingTop: "8vh",
-        padding: "8vh 8vw 5rem",
+        padding: isMobile ? "4vh 8vw 0" : "8vh 8vw 5rem",
         pointerEvents: "none",
         left: isMobile ? "-30vw" : "0",
         boxSizing: "border-box",
