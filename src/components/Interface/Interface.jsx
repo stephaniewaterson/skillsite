@@ -23,15 +23,15 @@ const Section = ({ children }) => {
 
 const skills = [
   { title: "React / React Native", level: 80 },
-  { title: "Nodejs", level: 80 },
-  { title: "Threejs / React Three Fiber", level: 60 },
-  { title: "Typescript", level: 60 },
+  { title: "Nodejs", level: 75 },
+  { title: "Threejs / React Three Fiber", level: 50 },
+  { title: "Typescript", level: 40 },
   { title: "Python", level: 70 },
 ];
 
 const languages = [
   { title: "🇬🇧 English", level: 100 },
-  { title: "🇪🇸 Spanish", level: 90 },
+  { title: "🇪🇸 Spanish", level: 85 },
   { title: "🇱🇧 Arabic", level: 25 },
 ];
 
