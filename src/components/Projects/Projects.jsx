@@ -45,9 +45,9 @@ export function Items() {
         height: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-start", // ← always flex-start, not center
-        paddingTop: "8vh", // ← always some top padding
-        padding: "8vh 8vw 5rem", // ← top, sides, bottom
+        justifyContent: "flex-start",
+        paddingTop: "8vh",
+        padding: "8vh 8vw 5rem",
         pointerEvents: "none",
         left: isMobile ? "-30vw" : "0",
         boxSizing: "border-box",

@@ -62,7 +62,7 @@ export const SkillsSection = () => {
         padding: isMobile ? "0 6vw" : "0 8vw",
 
         width: "100vw",
-        overflowY: isMobile ? "auto" : "visible", // ← allows scroll on mobile
+        overflowY: isMobile ? "auto" : "visible", 
         pointerEvents: "all",
       }}
     >

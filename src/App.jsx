@@ -56,6 +56,21 @@ function ScrollJumper({ targetRef, onDone }) {
   const { size, camera } = useThree();
   const destRef = useRef(null);
 
+  if (targetRef.current !== null) {
+    destRef.current = targetRef.current * pixelsPerUnit;
+    console.log(
+      "jumping to worldX:",
+      targetRef.current,
+      "dest px:",
+      destRef.current,
+      "totalWidth:",
+      el.scrollWidth - el.clientWidth,
+      "pixelsPerUnit:",
+      pixelsPerUnit
+    );
+    targetRef.current = null;
+  }
+
   useFrame(() => {
     const el = scroll.el;
     if (!el) return;
@@ -91,10 +106,10 @@ const isTablet = window.innerWidth <= 1217;
 
 const layout = isMobile
   ? {
-      projectsX: 18.5,
-      projectsJump: 10,
-      skillsX: 28,
-      skillsJump: 30,
+      projectsX: 23,
+      projectsJump: 15,
+      skillsX: 32,
+      skillsJump: 32,
       projectsY: 6,
       skillsY: 8,
       showSpaceMan: false,
@@ -137,7 +152,6 @@ function App({ children }) {
 
   useEffect(() => {
     if (open) {
-      // Wait for ScrollControls to resize before allowing jumps
       const timer = setTimeout(() => setScrollReady(true), 300);
       return () => clearTimeout(timer);
     } else {
@@ -279,7 +293,6 @@ function App({ children }) {
 
         <LoaderOverlay />
 
-        {/* Nav — only visible when laptop is open */}
         {open && scrollReady && (
           <nav style={navStyles}>
             {[
@@ -322,7 +335,7 @@ function App({ children }) {
               <ScrollControls
                 horizontal
                 damping={0}
-                pages={open ? 4.25 : 1}
+                pages={open ? (isMobile ? 3 : 4.25) : 1}
                 prepend={true}
                 distance={0.5}
               >
