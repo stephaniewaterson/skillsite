@@ -33,7 +33,7 @@ const navStyles = {
   transform: "translateX(-50%)",
   display: "flex",
   gap: "1rem",
-  zIndex: 100,
+  zIndex: 99999,
   pointerEvents: "all",
 };
 
