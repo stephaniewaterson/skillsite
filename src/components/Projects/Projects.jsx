@@ -39,18 +39,18 @@ export function Items() {
 
   return (
     <Html
-      position={[0, 0, 0]}
+      position={[0, isMobile ? 6 : 0, 0]}
       style={{
         width: "100vw",
         height: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: isMobile ? "flex-start" : "center",
-        paddingTop: isMobile ? "2vh" : "0",
-        paddingBottom: isMobile ? "5rem" : "0",
-        padding: isMobile ? "2vh 5vw 5rem" : "0 8vw",
+        justifyContent: "flex-start", // ← always flex-start, not center
+        paddingTop: "8vh", // ← always some top padding
+        padding: "8vh 8vw 5rem", // ← top, sides, bottom
         pointerEvents: "none",
         left: isMobile ? "-30vw" : "0",
+        boxSizing: "border-box",
       }}
     >
       <motion.div

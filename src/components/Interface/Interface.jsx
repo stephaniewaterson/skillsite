@@ -55,7 +55,7 @@ export const SkillsSection = () => {
   return (
     <Html
       className="skills"
-      position={[0, 0, 0]}
+      position={[0, isMobile ? 2 : 0, 0]}
       style={{
         display: "flex",
         alignItems: "center",

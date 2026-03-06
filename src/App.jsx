@@ -91,7 +91,7 @@ const isTablet = window.innerWidth <= 1217;
 
 const layout = isMobile
   ? {
-      projectsX: 14.5,
+      projectsX: 17.5,
       projectsJump: 10,
       skillsX: 32,
       skillsJump: 34,
