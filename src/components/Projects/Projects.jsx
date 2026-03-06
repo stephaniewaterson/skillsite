@@ -274,38 +274,39 @@ export function Items() {
               </div>
             ))}
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                padding: isMobile ? "0.9rem 1rem" : "1rem 1.2rem",
-                border: "1px dashed rgba(255,255,255,0.08)",
-                borderRadius: "12px",
-                opacity: 0.4,
-              }}
-            >
+            {!isMobile && (
               <div
                 style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "10px",
-                  border: "1px dashed rgba(255,255,255,0.15)",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
-                  color: "#555",
-                  fontSize: "1.2rem",
-                  flexShrink: 0,
+                  gap: "1rem",
+                  padding: isMobile ? "0.9rem 1rem" : "1rem 1.2rem",
+                  border: "1px dashed rgba(255,255,255,0.08)",
+                  borderRadius: "12px",
+                  opacity: 0.4,
                 }}
               >
-                +
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "10px",
+                    border: "1px dashed rgba(255,255,255,0.15)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#555",
+                    fontSize: "1.2rem",
+                    flexShrink: 0,
+                  }}
+                >
+                  +
+                </div>
+                <div style={{ fontSize: "0.85rem", color: "#555" }}>
+                  More coming soon
+                </div>
               </div>
-
-              <div style={{ fontSize: "0.85rem", color: "#555" }}>
-                More coming soon
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </motion.div>
