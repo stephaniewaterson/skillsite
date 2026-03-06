@@ -86,6 +86,7 @@
   font-size: clamp(1rem, 1.8vw, 1.4rem);
   font-weight: 500;
   font-family: "DM Sans", sans-serif;
+  color: white;
 }
 
 .lang__level {
