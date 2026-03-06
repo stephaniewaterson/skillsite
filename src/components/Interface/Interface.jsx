@@ -55,11 +55,11 @@ export const SkillsSection = () => {
   return (
     <Html
       className="skills"
-      position={[0, isMobile ? 2 : 0, 0]}
+      position={[0, isMobile ? 4 : 0, 0]}
       style={{
         display: "flex",
         alignItems: "flex-start",
-        padding: isMobile ? "0 6vw" : "0 8vw",
+        padding: isMobile ? "4vh 8vw 0" : "8vh 8vw 5rem",
 
         width: "100vw",
         overflowY: isMobile ? "auto" : "visible",

@@ -1,7 +1,7 @@
 import { Html } from "@react-three/drei";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-
+import "../../styles/partials/_typography.css";
 const projects = [
   {
     img: "/images/2.png",
@@ -64,13 +64,14 @@ export function Items() {
         }}
       >
         <h2
+          className="projects__title"
           style={{
-            fontFamily: "'Dela Gothic One', sans-serif",
             fontSize: "clamp(2.5rem, 5vw, 4rem)",
             color: "#f0f0f0",
             marginBottom: "0.75rem",
             paddingBottom: "1rem",
             borderBottom: "1px solid rgba(255,255,255,0.08)",
+            fontFamily: "OleoScript",
           }}
         >
           Projects
@@ -247,6 +248,18 @@ export function Items() {
                   >
                     {project.tags.join(" · ")}
                   </div>
+
+                  {project.link !== "#" && (
+                    <div
+                      style={{
+                        fontSize: "0.72rem",
+                        color: "#e8453c",
+                        marginTop: "0.3rem",
+                      }}
+                    >
+                      View project →
+                    </div>
+                  )}
                 </div>
 
                 <span
