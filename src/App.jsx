@@ -13,13 +13,13 @@ import {
   Scroll,
   useScroll,
 } from "@react-three/drei";
-import { Mac } from "../public/Mac-draco";
+import { Mac } from "./models/Mac-draco";
 import { easing } from "maath";
 import { useStore } from "../src/components/Store/Store";
 import { Overlay } from "./components/Overlay/Overlay";
 import { SkillsSection } from "./components/Interface/Interface";
 import { Items } from "./components/Projects/Projects";
-import { SpaceMan } from "../public/Outhere_space_buddy";
+import { SpaceMan } from "./models/Outhere_space_buddy";
 import { Html, useProgress } from "@react-three/drei";
 import gsap from "gsap";
 
@@ -68,13 +68,11 @@ function ScrollJumper({ targetRef, onDone }) {
     const worldWidth = worldHeight * (size.width / size.height);
     const pixelsPerUnit = size.width / worldWidth;
 
-    // When a new target comes in, calculate dest in pixels
     if (targetRef.current !== null) {
       destRef.current = targetRef.current * pixelsPerUnit;
       targetRef.current = null;
     }
 
-    // Lerp towards dest
     if (destRef.current !== null) {
       el.scrollLeft += (destRef.current - el.scrollLeft) * 0.08;
       if (Math.abs(destRef.current - el.scrollLeft) < 1) {
@@ -98,9 +96,16 @@ function App({ children }) {
   const titleRef = useRef();
 
   const [scrollReady, setScrollReady] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
 
-  const isMobile = window.innerWidth <= 767;
-  const isTablet = window.innerWidth <= 1217;
+  useEffect(() => {
+    const onResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const isMobile = width <= 767;
+  const isTablet = width <= 1217;
 
   // 3D world positions (where content sits visually)
   const projectsX = isMobile ? 18 : isTablet ? 15 : 35;
@@ -281,100 +286,106 @@ function App({ children }) {
         )}
 
         <ErrorBoundary>
-          <Canvas
-            className="flex justify-center items-center h-screen w-screen"
-            camera={{ position: [0, -1.5, 12.5] }}
-            dpr={[1, 3]}
-            gl={{ antialias: false }}
-          >
-            <ScrollControls
-              horizontal
-              damping={0}
-              pages={open ? 4 : 0}
-              prepend={true}
-              distance={0.5}
+          {didCatch ? (
+            <div style={{ color: "white", padding: 20 }}>
+              <pre>{String(error?.stack || error)}</pre>
+            </div>
+          ) : (
+            <Canvas
+              className="flex justify-center items-center h-screen w-screen"
+              camera={{ position: [0, -1.5, 12.5] }}
+              dpr={[1, 3]}
+              gl={{ antialias: false }}
             >
-              {scrollReady && (
-                <ScrollJumper targetRef={scrollTargetRef} onDone={() => {}} />
-              )}
+              <ScrollControls
+                horizontal
+                damping={0}
+                pages={open ? 4 : 1}
+                prepend={true}
+                distance={0.5}
+              >
+                {scrollReady && (
+                  <ScrollJumper targetRef={scrollTargetRef} onDone={() => {}} />
+                )}
 
-              <ambientLight />
+                <ambientLight />
 
-              <ContactShadows
-                resolution={512}
-                position={[0, -0.8, 0]}
-                opacity={1}
-                scale={10}
-                blur={2}
-                far={0.8}
-              />
-              <Scroll>
-                <Suspense>
-                  {/* Laptop */}
-                  <group
-                    rotation={[0, 0, 0]}
-                    onClick={(e) => (e.stopPropagation(), setOpen(!open))}
-                    position={[0, 0.5, 0]}
-                    scale={laptopScalingFactor}
-                  >
-                    <Selector>
-                      <Mac
-                        rotation={[1.65, Math.PI, 1]}
-                        open={open}
-                        hinge={hingeRotation}
-                        onPointerEnter={() => setHoveredState(true)}
-                      />
-                    </Selector>
-                    {open && (
-                      <Html position={[0, 7, 0]}>
-                        <h1 style={{ color: "white" }}>Stephanie Waterson</h1>
-                      </Html>
-                    )}
-                    {hoveredState && open && (
-                      <Overlay
-                        style={{
-                          position: "absolute",
-                          top: "60vh",
-                          left: "0.5em",
-                        }}
-                        className="overlay"
-                      />
-                    )}
-                  </group>
+                <ContactShadows
+                  resolution={512}
+                  position={[0, -0.8, 0]}
+                  opacity={1}
+                  scale={10}
+                  blur={2}
+                  far={0.8}
+                />
+                <Scroll>
+                  <Suspense>
+                    {/* Laptop */}
+                    <group
+                      rotation={[0, 0, 0]}
+                      onClick={(e) => (e.stopPropagation(), setOpen(!open))}
+                      position={[0, 0.5, 0]}
+                      scale={laptopScalingFactor}
+                    >
+                      <Selector>
+                        <Mac
+                          rotation={[1.65, Math.PI, 1]}
+                          open={open}
+                          hinge={hingeRotation}
+                          onPointerEnter={() => setHoveredState(true)}
+                        />
+                      </Selector>
+                      {open && (
+                        <Html position={[0, 7, 0]}>
+                          <h1 style={{ color: "white" }}>Stephanie Waterson</h1>
+                        </Html>
+                      )}
+                      {hoveredState && open && (
+                        <Overlay
+                          style={{
+                            position: "absolute",
+                            top: "60vh",
+                            left: "0.5em",
+                          }}
+                          className="overlay"
+                        />
+                      )}
+                    </group>
 
-                  {/* Skills */}
-                  <group position={[skillsX, 10, 0]}>
-                    <SkillsSection />
-                    {open && <SpaceMan position={[15, -15, 0]} scale={6} />}
-                  </group>
+                    {/* Skills */}
+                    <group position={[skillsX, 10, 0]}>
+                      <SkillsSection />
+                      {open && <SpaceMan position={[15, -15, 0]} scale={6} />}
+                    </group>
 
-                  {/* Projects — responsive */}
-                  <ResponsiveItems />
-                </Suspense>
-              </Scroll>
+                    {/* Projects — responsive */}
+                    <ResponsiveItems />
+                  </Suspense>
+                </Scroll>
 
-              <directionalLight
-                position={[0, 5, -2]}
-                scale={[3, 3, 3]}
-                intensity={Math.PI}
-                color="#FFFFFF"
-              />
-              <directionalLight
-                position={[2, 2, 2]}
-                scale={[3, 3, 3]}
-                intensity={Math.PI}
-                color="#FFFFFF"
-              />
+                <directionalLight
+                  position={[0, 5, -2]}
+                  scale={[3, 3, 3]}
+                  intensity={Math.PI}
+                  color="#FFFFFF"
+                />
+                <directionalLight
+                  position={[2, 2, 2]}
+                  scale={[3, 3, 3]}
+                  intensity={Math.PI}
+                  color="#FFFFFF"
+                />
 
-              <ContactShadows
-                position={[0, -4.5, 0]}
-                opacity={0.4}
-                scale={20}
-                blur={1.75}
-                far={4.5}
-              />
-            </ScrollControls>
-          </Canvas>
+                <ContactShadows
+                  position={[0, -4.5, 0]}
+                  opacity={0.4}
+                  scale={20}
+                  blur={1.75}
+                  far={4.5}
+                />
+              </ScrollControls>
+            </Canvas>
+          )}
         </ErrorBoundary>
       </div>
     </main>
