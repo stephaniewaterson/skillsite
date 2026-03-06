@@ -64,6 +64,7 @@ export const SkillsSection = () => {
         width: "100vw",
         overflowY: isMobile ? "auto" : "visible",
         pointerEvents: "none",
+        left: isMobile ? "-30vw" : "0",
       }}
     >
       <Section className="skills__section">
