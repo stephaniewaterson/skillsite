@@ -45,9 +45,12 @@ export function Items() {
         height: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
-        padding: isMobile ? "0 6vw" : "0 8vw",
+        justifyContent: isMobile ? "flex-start" : "center",
+        paddingTop: isMobile ? "2vh" : "0",
+        paddingBottom: isMobile ? "5rem" : "0",
+        padding: isMobile ? "2vh 5vw 5rem" : "0 8vw",
         pointerEvents: "none",
+        left: isMobile ? "-30vw" : "0",
       }}
     >
       <motion.div
