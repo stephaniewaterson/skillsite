@@ -109,7 +109,7 @@ const layout = isMobile
       projectsX: 25,
       projectsJump: 16.75,
       skillsX: 35,
-      skillsJump: 32,
+      skillsJump: 35,
       projectsY: 6,
       skillsY: 8,
       showSpaceMan: false,
