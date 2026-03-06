@@ -58,10 +58,12 @@ export const SkillsSection = () => {
       position={[0, isMobile ? 2 : 0, 0]}
       style={{
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         padding: isMobile ? "0 6vw" : "0 8vw",
-        pointerEvents: "none",
+
         width: "100vw",
+        overflowY: isMobile ? "auto" : "visible", // ← allows scroll on mobile
+        pointerEvents: "all",
       }}
     >
       <Section className="skills__section">
