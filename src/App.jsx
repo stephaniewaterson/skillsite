@@ -211,10 +211,43 @@ function App({ children }) {
           top: 0,
           left: 0,
           zIndex: 9999,
+          fontFamily: "'Dela Gothic One', sans-serif",
         }}
       >
-        <h2>Loading...</h2>
-        <p>{Math.floor(progress)}%</p>
+        <h2
+          style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", marginBottom: "1rem" }}
+        >
+          Loading...
+        </h2>
+        <div
+          style={{
+            width: "200px",
+            height: "4px",
+            background: "rgba(255,255,255,0.1)",
+            borderRadius: "99px",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              width: `${progress}%`,
+              height: "100%",
+              background: "linear-gradient(90deg, #e8453c, #ff8a65)",
+              borderRadius: "99px",
+              transition: "width 0.3s ease",
+            }}
+          />
+        </div>
+        <p
+          style={{
+            marginTop: "0.75rem",
+            color: "#888",
+            fontSize: "0.85rem",
+            fontFamily: "'DM Sans', sans-serif",
+          }}
+        >
+          {Math.floor(progress)}%
+        </p>
       </div>
     );
   }
