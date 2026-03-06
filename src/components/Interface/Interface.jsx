@@ -63,7 +63,7 @@ export const SkillsSection = () => {
 
         width: "100vw",
         overflowY: isMobile ? "auto" : "visible",
-        pointerEvents: "all",
+        pointerEvents: "none",
       }}
     >
       <Section className="skills__section">
@@ -77,7 +77,7 @@ export const SkillsSection = () => {
             gap: isMobile ? "2rem" : "8vw",
             alignItems: "flex-start",
             width: isMobile ? "100%" : "90vw",
-            pointerEvents: "all",
+            pointerEvents: "none",
           }}
         >
           <div
