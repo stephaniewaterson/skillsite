@@ -106,10 +106,10 @@ const isTablet = window.innerWidth <= 1217;
 
 const layout = isMobile
   ? {
-      projectsX: 25,
-      projectsJump: 14,
+      projectsX: 25.5,
+      projectsJump: 16.75,
       skillsX: 32,
-      skillsJump: 32,
+      skillsJump: 30,
       projectsY: 6,
       skillsY: 8,
       showSpaceMan: false,
@@ -368,7 +368,7 @@ function App({ children }) {
               <ScrollControls
                 horizontal
                 damping={0}
-                pages={open ? (isMobile ? 4 : 4.25) : 1}
+                pages={open ? (isMobile ? 3 : 4.25) : 1}
                 prepend={true}
                 distance={0.5}
               >
