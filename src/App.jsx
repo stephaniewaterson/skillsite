@@ -170,7 +170,7 @@ function App({ children }) {
     );
   }
   const laptopScalingFactor = isMobile
-    ? Math.min(Math.max(window.innerWidth / 1100, 0.8) * 0.75)
+    ? Math.min(Math.max(window.innerWidth / 1100, 0.8) * 0.8)
     : Math.min(Math.max(window.innerWidth / 1100, 0.8), 1);
 
   useEffect(() => {
@@ -349,6 +349,20 @@ function App({ children }) {
                 {label}
               </button>
             ))}
+            <a
+              href="/Resume_Stephanie_Marie_Waterson.pdf"
+              download
+              style={{
+                ...navBtnStyles,
+                textDecoration: "none",
+                color: "#e8453c",
+                padding: "0.55rem 1.8rem",
+                border: "1px solid rgba(232,69,60,0.5)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              CV ↓
+            </a>
           </nav>
         )}
 
