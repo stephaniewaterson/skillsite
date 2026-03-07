@@ -405,9 +405,9 @@ function App({ children }) {
                       {open && (
                         <Html position={[0, 7, 0]}>
                           <h1
+                            className="main__title"
                             style={{
                               color: "white",
-                              fontSize: isMobile ? "2.3rem" : "2.5rem", // ← smaller on mobile
                               whiteSpace: "nowrap",
                             }}
                           >
@@ -415,7 +415,7 @@ function App({ children }) {
                           </h1>
                         </Html>
                       )}
-                      {hoveredState && open && (
+                      {open && (
                         <Overlay
                           style={{
                             position: "absolute",

@@ -18,6 +18,8 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
+const isMobile = window.innerWidth <= 767;
+
 function List({ children, openOverlay }) {
   return (
     <motion.ul
@@ -50,10 +52,20 @@ export function Overlay() {
         >
           <div className="info">
             <h3>
-              <span className="accent">Developer</span>
+              <span
+                className="accent"
+                style={{ fontSize: isMobile ? "2.25rem" : "3rem" }}
+              >
+                Developer
+              </span>
             </h3>
 
-            <h4 className="accent_2">London</h4>
+            <h4
+              className="accent_2"
+              style={{ fontSize: isMobile ? "1.5rem" : "2rem" }}
+            >
+              London
+            </h4>
             <div className="icon"></div>
           </div>
         </div>
