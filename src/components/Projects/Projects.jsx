@@ -130,6 +130,7 @@ export function Items() {
                   color: "#888",
                   lineHeight: "1.7",
                   marginBottom: "1rem",
+                  display: isMobile ? "none" : "block", // ← add this
                 }}
               >
                 {featured.desc}

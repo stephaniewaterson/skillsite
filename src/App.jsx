@@ -169,10 +169,9 @@ function App({ children }) {
       </group>
     );
   }
-  const laptopScalingFactor = Math.min(
-    Math.max(window.innerWidth / 1100, 0.8),
-    1
-  );
+  const laptopScalingFactor = isMobile
+    ? Math.min(Math.max(window.innerWidth / 1100, 0.8) * 0.75)
+    : Math.min(Math.max(window.innerWidth / 1100, 0.8), 1);
 
   useEffect(() => {
     if (!mainRef.current || !titleRef.current) return;
@@ -405,7 +404,15 @@ function App({ children }) {
                       </Selector>
                       {open && (
                         <Html position={[0, 7, 0]}>
-                          <h1 style={{ color: "white" }}>Stephanie Waterson</h1>
+                          <h1
+                            style={{
+                              color: "white",
+                              fontSize: isMobile ? "2.3rem" : "2.5rem", // ← smaller on mobile
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            Stephanie Waterson
+                          </h1>
                         </Html>
                       )}
                       {hoveredState && open && (
