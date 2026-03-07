@@ -327,6 +327,17 @@ function App({ children }) {
 
         {open && scrollReady && (
           <nav style={navStyles}>
+            <button
+              style={{
+                ...navBtnStyles,
+              }}
+              onClick={() => {
+                scrollTargetRef.current = 0;
+                setTimeout(() => setOpen(false), 400);
+              }}
+            >
+              ⌂
+            </button>
             {[
               { label: "Projects", worldX: projectsJumpX },
               { label: "Skills", worldX: skillsJumpX },
