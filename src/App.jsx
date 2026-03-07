@@ -142,7 +142,7 @@ const skillsJumpX = layout.skillsJump;
 function App({ children }) {
   const { ErrorBoundary, didCatch, error } = useErrorBoundary();
   const [open, setOpen] = useState(false);
-  const [hoveredState, setHoveredState] = useState(false);
+  // const [hoveredState, setHoveredState] = useState(false);
   const scrollTargetRef = useRef(null);
 
   const mainRef = useRef();
@@ -424,7 +424,7 @@ function App({ children }) {
                           rotation={[1.65, Math.PI, 1]}
                           open={open}
                           hinge={hingeRotation}
-                          onPointerEnter={() => setHoveredState(true)}
+                          // onPointerEnter={() => setHoveredState(true)}
                         />
                       </Selector>
                       {open && (
