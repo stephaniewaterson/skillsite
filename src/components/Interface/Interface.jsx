@@ -136,7 +136,15 @@ export const SkillsSection = () => {
             className="skills_box2"
             style={{ width: isMobile ? "100%" : "auto" }}
           >
-            <h2 className="skills__title">Languages</h2>
+            <h2
+              className="skills__title"
+              style={{
+                marginBottom: "1rem",
+                marginTop: isMobile ? "0.5rem" : "2.5rem",
+              }}
+            >
+              Languages
+            </h2>
 
             <div
               style={{
