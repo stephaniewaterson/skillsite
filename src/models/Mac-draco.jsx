@@ -9,13 +9,12 @@ export function Mac({ open, ...props }) {
   const group = useRef();
   const hingeGroup = useRef();
 
-  const [hovered, setHovered] = useState(false);
+  // const [hovered, setHovered] = useState(false);
 
-  useEffect(() => {
-    document.body.style.cursor = hovered ? "pointer" : "auto";
-  }, [hovered]);
+  // useEffect(() => {
+  //   document.body.style.cursor = hovered ? "pointer" : "auto";
+  // }, [hovered]);
 
-  // Animate floating & rotation on the main group (keep your existing floating effect)
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
 
@@ -41,13 +40,11 @@ export function Mac({ open, ...props }) {
     );
   });
 
-  // Animate hinge rotation with GSAP when `open` changes
   useEffect(() => {
     if (!hingeGroup.current) return;
-
     gsap.to(hingeGroup.current.rotation, {
-      x: open ? 0 : 1.57, // adjust 1.2 radians for open angle as you want
-      duration: 1, // 1 second animation
+      x: open ? 0 : 1.57,
+      duration: 1,
       ease: "power2.inOut",
     });
   }, [open]);
@@ -57,8 +54,8 @@ export function Mac({ open, ...props }) {
       {...props}
       ref={group}
       dispose={null}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
+      // onPointerOver={() => setHovered(true)}
+      // onPointerOut={() => setHovered(false)}
     >
       <group ref={hingeGroup} rotation-x={0} position={[0, -0.04, 0.491]}>
         <group position={[0.002, -0.038, 0.414]} rotation={[0.014, 0, 0]}>
@@ -78,7 +75,6 @@ export function Mac({ open, ...props }) {
           </group>
         </group>
       </group>
-
       <mesh
         geometry={nodes.keyboard.geometry}
         material={materials.keys}

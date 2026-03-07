@@ -152,7 +152,7 @@ function App({ children }) {
 
   useEffect(() => {
     if (open) {
-      const timer = setTimeout(() => setScrollReady(true), 300);
+      const timer = setTimeout(() => setScrollReady(true), 1500);
       return () => clearTimeout(timer);
     } else {
       setScrollReady(false);
