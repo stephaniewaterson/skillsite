@@ -49,6 +49,12 @@ export function Mac({ open, ...props }) {
     });
   }, [open]);
 
+  useEffect(() => {
+    if (open && group.current) {
+      group.current.rotation.y = group.current.rotation.y - Math.PI;
+    }
+  }, [open]);
+
   return (
     <group
       {...props}
