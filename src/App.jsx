@@ -60,7 +60,7 @@ const navBtnStyles = {
 
 const layout = isMobile
   ? {
-      projectsX: 23,
+      projectsX: 23.25,
       projectsJump: 15.2,
       skillsX: 36,
       skillsJump: 22.5,
