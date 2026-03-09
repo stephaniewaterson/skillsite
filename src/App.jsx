@@ -48,9 +48,9 @@ const navBtnStyles = {
   background: "rgba(255,255,255,0.12)",
   border: "1px solid rgba(255,255,255,0.3)",
   color: "#fff",
-  padding: "0.55rem 1.4rem",
+  padding: isMobile ? "0.4rem 0.9rem" : "0.55rem 1.4rem",
   borderRadius: "999px",
-  fontSize: "0.85rem",
+  fontSize: isMobile ? "0.75rem" : "0.85rem",
   letterSpacing: "0.08em",
   cursor: "pointer",
   backdropFilter: "blur(10px)",
@@ -398,7 +398,7 @@ function App() {
                 whiteSpace: "nowrap",
               }}
             >
-              CV ↓
+              {isMobile ? "CV" : "CV ↓"}
             </a>
             <a
               href="https://github.com/stephaniewaterson"
@@ -414,7 +414,7 @@ function App() {
                 color: "#e8453c",
               }}
             >
-              GitHub ↗
+              {isMobile ? "GitHub" : "GitHub ↗"}
             </a>
           </nav>
         )}
