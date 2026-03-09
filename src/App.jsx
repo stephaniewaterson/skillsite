@@ -302,6 +302,7 @@ function App() {
     gsap.to(titleRef.current, {
       opacity: open ? 0 : 1,
       y: open ? 50 : 0,
+      delay: open ? 0 : 0.5,
       duration: 1,
       ease: "power2.inOut",
     });
