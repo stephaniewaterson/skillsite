@@ -60,8 +60,8 @@ const navBtnStyles = {
 
 const layout = isMobile
   ? {
-      projectsX: 18,
-      projectsJump: 12,
+      projectsX: 23,
+      projectsJump: 15,
       skillsX: 36,
       skillsJump: 22.5,
       projectsY: 6,
@@ -284,10 +284,9 @@ function App() {
 
   useEffect(() => {
     if (open) {
-      const timer = setTimeout(() => setScrollReady(true), 1500);
+      const timer = setTimeout(() => setScrollReady(true), 500);
       return () => clearTimeout(timer);
     }
-
     setScrollReady(false);
   }, [open]);
 
