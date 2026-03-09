@@ -9,12 +9,6 @@ export function Mac({ open, ...props }) {
   const group = useRef();
   const hingeGroup = useRef();
 
-  // const [hovered, setHovered] = useState(false);
-
-  // useEffect(() => {
-  //   document.body.style.cursor = hovered ? "pointer" : "auto";
-  // }, [hovered]);
-
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
 
@@ -56,13 +50,7 @@ export function Mac({ open, ...props }) {
   }, [open]);
 
   return (
-    <group
-      {...props}
-      ref={group}
-      dispose={null}
-      // onPointerOver={() => setHovered(true)}
-      // onPointerOut={() => setHovered(false)}
-    >
+    <group {...props} ref={group} dispose={null}>
       <group ref={hingeGroup} rotation-x={0} position={[0, -0.04, 0.491]}>
         <group position={[0.002, -0.038, 0.414]} rotation={[0.014, 0, 0]}>
           <group position={[0, 2.965, -0.63]} rotation={[Math.PI / 2, 0, 0]}>
