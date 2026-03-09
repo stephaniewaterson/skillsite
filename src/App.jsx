@@ -28,15 +28,14 @@ extend({ TextGeometry });
 
 const isMobile = window.innerWidth <= 767;
 const isTablet = window.innerWidth <= 1217;
-// const isSmallLaptop = window.innerWidth <= 1417;
+const isLargeLaptop = window.innerWidth >= 1817;
 
 const navStyles = {
   position: "fixed",
-  bottom: "2rem",
+  bottom: isMobile ? "1rem" : "2rem",
   left: "50%",
   transform: "translateX(-50%)",
   display: "flex",
-  // gap: "1rem",
   justifyContent: "center",
   gap: "0.5rem",
   zIndex: 99999,
@@ -61,8 +60,8 @@ const navBtnStyles = {
 
 const layout = isMobile
   ? {
-      projectsX: 25,
-      projectsJump: 16,
+      projectsX: 18,
+      projectsJump: 12,
       skillsX: 36,
       skillsJump: 22.5,
       projectsY: 6,
@@ -79,7 +78,19 @@ const layout = isMobile
       skillsY: 10,
       showSpaceMan: false,
     }
-  : {
+  : // : isLargeLaptop
+    // ? {
+    //     projectsX: 37,
+    //     projectsJump: 22,
+    //     skillsX: 90,
+    //     skillsJump: 70,
+    //     projectsY: 12,
+    //     skillsY: 10,
+    //     showSpaceMan: true,
+    //     spaceManX: -23,
+    //     spaceManY: -16,
+    //   }
+    {
       projectsX: 35,
       projectsJump: 20,
       skillsX: 80,
@@ -303,7 +314,12 @@ function App() {
     <main
       ref={mainRef}
       className={open ? "open" : "closed"}
-      style={{ height: "100vh", width: "100vw", overflow: "hidden" }}
+      style={{
+        height: "100vh",
+        width: "100vw",
+        overflow: "hidden",
+        // overflowX: "hidden",
+      }}
     >
       <div
         style={{
