@@ -126,10 +126,12 @@ export const SkillsSection = () => {
               ))}
             </div>
 
-            <p className="other">
-              Also: MySQL · REST APIs · Agile · OAuth · GitHub · Salsa Dancing
-              💃
-            </p>
+            {!isMobile && (
+              <p className="other">
+                Also: MySQL · REST APIs · Agile · OAuth · GitHub · Salsa Dancing
+                💃
+              </p>
+            )}
           </div>
 
           <div
@@ -141,6 +143,7 @@ export const SkillsSection = () => {
               style={{
                 marginBottom: "1rem",
                 marginTop: isMobile ? "0rem" : "2.5rem",
+                fontSize: isMobile ? "1.6rem" : undefined,
               }}
             >
               Languages
