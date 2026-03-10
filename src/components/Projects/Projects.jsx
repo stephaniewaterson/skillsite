@@ -105,7 +105,7 @@ export function Items() {
               alt={featured.title}
               style={{
                 width: "100%",
-                height: isMobile ? "140px" : "200px",
+                height: isMobile ? "100px" : "200px",
                 objectFit: "cover",
                 display: "block",
                 borderBottom: "1px solid rgba(255,255,255,0.06)",
@@ -141,7 +141,8 @@ export function Items() {
                   display: "flex",
                   gap: "0.4rem",
                   flexWrap: "wrap",
-                  marginBottom: "1.2rem",
+                  alignItems: "center",
+                  marginBottom: isMobile ? "0.5rem" : "1.2rem",
                 }}
               >
                 {featured.tags.map((tag, i) => (

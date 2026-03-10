@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Html } from "@react-three/drei";
-import "./Interface.css";
+import "./Interface.scss";
 import { useEffect, useState } from "react";
 
 const Section = ({ children }) => {
@@ -75,7 +75,7 @@ export const SkillsSection = () => {
           style={{
             display: "flex",
             flexDirection: isMobile ? "column" : "row",
-            gap: isMobile ? "2rem" : "8vw",
+            gap: isMobile ? "1rem" : "8vw",
             alignItems: "flex-start",
             width: isMobile ? "100%" : "90vw",
             pointerEvents: "none",
@@ -140,7 +140,7 @@ export const SkillsSection = () => {
               className="skills__title"
               style={{
                 marginBottom: "1rem",
-                marginTop: isMobile ? "0.5rem" : "2.5rem",
+                marginTop: isMobile ? "0rem" : "2.5rem",
               }}
             >
               Languages

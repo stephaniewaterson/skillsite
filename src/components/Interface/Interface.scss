@@ -1,3 +1,5 @@
+@use "../../styles/partials/mixins" as *;
+
 .skills {
   font-family: "OleoScript";
 }
@@ -109,4 +111,13 @@
 
 .skills_box2 .skills__title {
   font-size: 2rem;
+}
+
+.skill__title {
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+
+  @include tablet {
+    margin-top: 2.5rem;
+  }
 }
