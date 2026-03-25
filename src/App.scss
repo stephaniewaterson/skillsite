@@ -1,5 +1,7 @@
 @use "./styles/partials/mixins" as *;
 
+
+
 @font-face {
   font-family: "Playwrite";
   src: url("./assets/fonts/Playwrite_RO/static/PlaywriteRO-Regular.ttf")
@@ -62,7 +64,7 @@ h1 {
 
 .closed .scroll {
   overflow: hidden !important;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .open .scroll {

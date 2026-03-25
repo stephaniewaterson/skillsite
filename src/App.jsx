@@ -275,6 +275,12 @@ function App() {
   const scrollTargetRef = useRef(null);
   const mainRef = useRef(null);
   const titleRef = useRef(null);
+  const [showHint, setShowHint] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowHint(true), 1250);
+    return () => clearTimeout(timer);
+  }, []);
 
   const laptopScalingFactor = useMemo(() => {
     return isMobile
@@ -341,6 +347,43 @@ function App() {
         >
           Click to open
         </h1>
+        {!open && showHint && (
+          <>
+            <style>{`
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(8px); }
+      }
+      @keyframes fadein {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    `}</style>
+            <div
+              style={{
+                position: "absolute",
+                bottom: isMobile ? "28rem" : isTablet ? "24rem" : "17rem",
+                left: "50%",
+                transform: "translateX(-50%)",
+                textAlign: "center",
+                zIndex: 9999,
+                pointerEvents: "none",
+                animation: "fadein 0.8s ease forwards",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "4rem",
+                  fontSize: isMobile ? "2rem" : isTablet ? "2.5rem" : "4rem",
+                  display: "inline-block",
+                  animation: "bounce 1.2s ease-in-out infinite",
+                }}
+              >
+                ↓
+              </div>
+            </div>
+          </>
+        )}
 
         <LoaderOverlay />
 
