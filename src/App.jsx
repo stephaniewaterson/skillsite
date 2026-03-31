@@ -362,7 +362,8 @@ function App() {
             <div
               style={{
                 position: "absolute",
-                bottom: isMobile ? "28rem" : isTablet ? "24rem" : "17rem",
+                top: isMobile ? "25rem" : isTablet ? "24rem" : "17rem",
+                bottom: "auto",
                 left: "50%",
                 transform: "translateX(-50%)",
                 textAlign: "center",
@@ -377,8 +378,6 @@ function App() {
                   fontSize: isMobile ? "2rem" : isTablet ? "2.5rem" : "4rem",
                   display: "inline-block",
                   animation: "bounce 1.2s ease-in-out infinite",
-                  top: "35%",
-                  bottom: "auto",
                 }}
               >
                 ↓
