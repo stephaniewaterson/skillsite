@@ -32,7 +32,7 @@ const isLargeLaptop = window.innerWidth >= 1817;
 
 const navStyles = {
   position: "fixed",
-  bottom: isMobile ? "1rem" : "2rem",
+  bottom: isMobile ? "1.5rem" : "2rem",
   left: "50%",
   transform: "translateX(-50%)",
   display: "flex",
@@ -48,9 +48,9 @@ const navBtnStyles = {
   background: "rgba(255,255,255,0.12)",
   border: "1px solid rgba(255,255,255,0.3)",
   color: "#fff",
-  padding: isMobile ? "0.4rem 0.9rem" : "0.55rem 1.4rem",
+  padding: isMobile ? "0.6rem 1.2rem" : "0.75rem 1.8rem",
   borderRadius: "999px",
-  fontSize: isMobile ? "0.75rem" : "0.85rem",
+  fontSize: isMobile ? "0.85rem" : "1rem",
   letterSpacing: "0.08em",
   cursor: "pointer",
   backdropFilter: "blur(10px)",

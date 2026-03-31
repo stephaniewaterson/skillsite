@@ -54,18 +54,18 @@ export function Overlay() {
             <h3>
               <span
                 className="accent"
-                style={{ fontSize: isMobile ? "2.25rem" : "3rem" }}
+                style={{ fontSize: isMobile ? "1rem" : "1.75rem" }}
               >
-                Developer
+                Developer <br /> & Spatial Data Scientist
               </span>
             </h3>
 
-            <h4
+            {/* <h4
               className="accent_2"
               style={{ fontSize: isMobile ? "1.5rem" : "2rem" }}
             >
               London
-            </h4>
+            </h4> */}
             <div className="icon"></div>
           </div>
         </div>

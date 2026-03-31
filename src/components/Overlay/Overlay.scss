@@ -13,7 +13,7 @@
   -webkit-text-stroke: 1px white;
   color: transparent;
   font-size: 3rem;
-  padding: 0 10rem 0 0;
+  padding: 0 2rem 0 0;
   animation: fade-in 1s;
 
   @include tablet {
@@ -28,15 +28,16 @@
 .info h3 {
   animation: fade-in 1s;
   font-size: 3rem;
-  letter-spacing: -2px;
-  line-height: 1em;
+  // letter-spacing: -2px;
+  line-height: 0.2em;
   margin: 0;
   padding: 7rem 2rem 0 1rem;
   font-family: "GeistSans";
+  white-space: nowrap;
 
   @include tablet {
     font-size: 5rem;
-    padding: 10rem 20rem 0 3rem;
+    padding: 11rem 16rem 0 3rem;
   }
 }
 
