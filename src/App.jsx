@@ -55,7 +55,7 @@ const navBtnStyles = {
   cursor: "pointer",
   backdropFilter: "blur(10px)",
   transition: "background 0.2s, transform 0.15s",
-  fontFamily: "inherit",
+  fontFamily: "'Geist Mono', monospace",
 };
 
 const layout = isMobile
@@ -377,6 +377,8 @@ function App() {
                   fontSize: isMobile ? "2rem" : isTablet ? "2.5rem" : "4rem",
                   display: "inline-block",
                   animation: "bounce 1.2s ease-in-out infinite",
+                  top: "35%",
+                  bottom: "auto",
                 }}
               >
                 ↓

@@ -13,3 +13,27 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "GeistPixel";
+  src: url("../../assets/fonts/fonts-geist/GeistPixel/ttf/GeistPixel-Square.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("../../assets/fonts/fonts-geist/GeistMono/ttf/GeistMono-Light.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GeistSans";
+  src: url("../../assets/fonts/fonts-geist/Geist/ttf/Geist-Light.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}

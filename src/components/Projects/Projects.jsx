@@ -71,7 +71,7 @@ export function Items() {
             marginBottom: "0.75rem",
             paddingBottom: "1rem",
             borderBottom: "1px solid rgba(255,255,255,0.08)",
-            fontFamily: "OleoScript",
+            fontFamily: "GeistSans",
           }}
         >
           Projects
@@ -115,7 +115,7 @@ export function Items() {
             <div style={{ padding: isMobile ? "1rem" : "1.5rem" }}>
               <h3
                 style={{
-                  fontFamily: "'Dela Gothic One', sans-serif",
+                  fontFamily: "'GeistSans', monospace",
                   fontSize: isMobile ? "1.1rem" : "1.4rem",
                   color: "#f0f0f0",
                   marginBottom: "0.6rem",
@@ -130,7 +130,8 @@ export function Items() {
                   color: "#888",
                   lineHeight: "1.7",
                   marginBottom: "1rem",
-                  display: isMobile ? "none" : "block", // ← add this
+                  display: isMobile ? "none" : "block",
+                  fontFamily: "'GeistSans', monospace",
                 }}
               >
                 {featured.desc}
@@ -175,7 +176,7 @@ export function Items() {
                   color: "#e8453c",
                   fontSize: "0.8rem",
                   cursor: "pointer",
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'GeistSans', monospace",
                 }}
               >
                 View project →
@@ -236,7 +237,7 @@ export function Items() {
                       fontWeight: 600,
                       color: "#f0f0f0",
                       marginBottom: "0.2rem",
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "'GeistSans', monospace",
                     }}
                   >
                     {project.title}
@@ -246,6 +247,7 @@ export function Items() {
                     style={{
                       fontSize: "0.72rem",
                       color: "#666",
+                      fontFamily: "'GeistSans', monospace",
                     }}
                   >
                     {project.tags.join(" · ")}
@@ -304,7 +306,13 @@ export function Items() {
                 >
                   +
                 </div>
-                <div style={{ fontSize: "0.85rem", color: "#555" }}>
+                <div
+                  style={{
+                    fontSize: "0.85rem",
+                    color: "#555",
+                    fontFamily: "'GeistSans', monospace",
+                  }}
+                >
                   More coming soon
                 </div>
               </div>

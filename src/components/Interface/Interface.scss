@@ -1,7 +1,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .skills {
-  font-family: "OleoScript";
+  font-family: "GeistSans";
 }
 
 .skills__box2 {
@@ -37,7 +37,7 @@
 .skills__name {
   color: white;
   margin-bottom: 1.8rem;
-  font-family: "DM Sans", sans-serif;
+  font-family: "GeistSans", sans-serif;
 }
 
 .skills__name h3 {
@@ -87,14 +87,14 @@
 .lang__name {
   font-size: clamp(1rem, 1.8vw, 1.4rem);
   font-weight: 500;
-  font-family: "DM Sans", sans-serif;
+  font-family: "GeistSans", sans-serif;
   color: white;
 }
 
 .lang__level {
   font-size: clamp(0.75rem, 1vw, 0.9rem);
   color: #888;
-  font-family: "DM Sans", sans-serif;
+  font-family: "GeistSans", sans-serif;
 }
 
 .other {
@@ -102,7 +102,7 @@
   color: #666;
   margin-top: 2rem;
   line-height: 1.8;
-  font-family: "DM Sans", sans-serif;
+  font-family: "GeistSans", sans-serif;
 }
 
 .skills_box2 {
