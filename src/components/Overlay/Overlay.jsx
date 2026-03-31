@@ -56,7 +56,7 @@ export function Overlay() {
                 className="accent"
                 style={{ fontSize: isMobile ? "1.25rem" : "1.75rem" }}
               >
-                Developer <br /> & Spatial Data Scientist
+                Developer <br /> | Spatial Data Scientist
               </span>
             </h3>
 
