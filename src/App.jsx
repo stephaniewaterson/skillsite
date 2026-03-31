@@ -362,7 +362,7 @@ function App() {
             <div
               style={{
                 position: "absolute",
-                top: isMobile ? "25rem" : isTablet ? "24rem" : "17rem",
+                top: isMobile ? "25rem" : isTablet ? "24rem" : "25rem",
                 bottom: "auto",
                 left: "50%",
                 transform: "translateX(-50%)",
@@ -401,7 +401,7 @@ function App() {
             </button>
 
             {[
-              { label: "Projects", worldX: projectsJumpX },
+              { label: "Recent Work", worldX: projectsJumpX },
               { label: "Skills", worldX: skillsJumpX },
             ].map(({ label, worldX }) => (
               <button

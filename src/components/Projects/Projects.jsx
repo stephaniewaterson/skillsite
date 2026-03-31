@@ -74,7 +74,7 @@ export function Items() {
             fontFamily: "GeistSans",
           }}
         >
-          Projects
+          Recent Work
         </h2>
 
         <div
