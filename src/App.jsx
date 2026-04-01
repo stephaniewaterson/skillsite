@@ -366,7 +366,7 @@ function App() {
             <div
               style={{
                 position: "absolute",
-                top: isMobile ? "25rem" : isTablet ? "24rem" : "25rem",
+                top: isMobile ? "20rem" : isTablet ? "24rem" : "25rem",
                 bottom: "auto",
                 left: "50%",
                 transform: "translateX(-50%)",
