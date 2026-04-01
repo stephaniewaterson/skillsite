@@ -358,6 +358,10 @@ function App() {
         from { opacity: 0; }
         to { opacity: 1; }
       }
+      @keyframes bounceX {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(6px); }
+      }
     `}</style>
             <div
               style={{
@@ -385,7 +389,30 @@ function App() {
             </div>
           </>
         )}
-
+        {open && scrollReady && (
+          <div
+            style={{
+              position: "fixed",
+              right: "1.5rem",
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "rgba(255,255,255,0.4)",
+              fontSize: "0.75rem",
+              letterSpacing: "0.15em",
+              pointerEvents: "none",
+              zIndex: 9999,
+              display: "flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              animation: "fadein 0.8s ease forwards",
+            }}
+          >
+            <span>scroll</span>
+            <div style={{ animation: "bounceX 1.2s ease-in-out infinite" }}>
+              →
+            </div>
+          </div>
+        )}
         <LoaderOverlay />
 
         {open && scrollReady && (
