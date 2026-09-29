@@ -69,10 +69,11 @@ export function Items() {
             fontSize: "clamp(2.5rem, 5vw, 4rem)",
             color: "#f0f0f0",
             marginBottom: "0.75rem",
-            paddingBottom: "5rem",
+            paddingBottom: "1rem",
             borderBottom: "1px solid rgba(255,255,255,0.08)",
             fontFamily: "GeistSans",
-            top: ".5rem"
+            top: ".5rem",
+            paddingTop: "0rem",
           }}
         >
           Recent Work
