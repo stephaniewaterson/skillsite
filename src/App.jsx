@@ -48,7 +48,7 @@ const navBtnStyles = {
   background: "rgba(255,255,255,0.12)",
   border: "1px solid rgba(255,255,255,0.3)",
   color: "#fff",
-  padding: isMobile ? "0.6rem 1.2rem" : "0.75rem 1.8rem",
+  padding: isMobile ? "0.6rem 1.2rem" : "0.75rem 1rem",
   borderRadius: "999px",
   fontSize: isMobile ? "0.85rem" : "1rem",
   letterSpacing: "0.08em",
@@ -56,6 +56,7 @@ const navBtnStyles = {
   backdropFilter: "blur(10px)",
   transition: "background 0.2s, transform 0.15s",
   fontFamily: "'Geist Mono', monospace",
+  height: "3rem",
 };
 
 const layout = isMobile
