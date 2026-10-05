@@ -38,8 +38,8 @@ const navStyles = {
   display: "flex",
   justifyContent: "center",
   gap: "0.5rem",
-  zIndex: 99999,
-  pointerEvents: "all",
+  zIndex: 99999999999,
+  pointerEvents: "auto",
   width: isMobile ? "90vw" : "auto",
   flexWrap: isMobile ? "wrap" : "nowrap",
 };
@@ -70,38 +70,38 @@ const layout = isMobile
       showSpaceMan: false,
     }
   : isTablet
-  ? {
-      projectsX: 25,
-      projectsJump: 14,
-      skillsX: 44,
-      skillsJump: 38,
-      projectsY: 12,
-      skillsY: 10,
-      showSpaceMan: false,
-    }
-  : // : isLargeLaptop
-    // ? {
-    //     projectsX: 37,
-    //     projectsJump: 22,
-    //     skillsX: 90,
-    //     skillsJump: 70,
-    //     projectsY: 12,
-    //     skillsY: 10,
-    //     showSpaceMan: true,
-    //     spaceManX: -23,
-    //     spaceManY: -16,
-    //   }
-    {
-      projectsX: 35,
-      projectsJump: 20,
-      skillsX: 80,
-      skillsJump: 40,
-      projectsY: 12,
-      skillsY: 10,
-      showSpaceMan: true,
-      spaceManX: -13,
-      spaceManY: -16,
-    };
+    ? {
+        projectsX: 25,
+        projectsJump: 14,
+        skillsX: 44,
+        skillsJump: 38,
+        projectsY: 12,
+        skillsY: 10,
+        showSpaceMan: false,
+      }
+    : // : isLargeLaptop
+      // ? {
+      //     projectsX: 37,
+      //     projectsJump: 22,
+      //     skillsX: 90,
+      //     skillsJump: 70,
+      //     projectsY: 12,
+      //     skillsY: 10,
+      //     showSpaceMan: true,
+      //     spaceManX: -23,
+      //     spaceManY: -16,
+      //   }
+      {
+        projectsX: 35,
+        projectsJump: 20,
+        skillsX: 80,
+        skillsJump: 40,
+        projectsY: 12,
+        skillsY: 10,
+        showSpaceMan: true,
+        spaceManX: -13,
+        spaceManY: -16,
+      };
 
 const projectsJumpX = layout.projectsJump;
 const skillsJumpX = layout.skillsJump;
@@ -188,21 +188,21 @@ function Selector({ children }) {
       ref.current.position,
       [(pointer.x * width) / 2, (pointer.y * height) / 5, 5],
       store.openOverlay ? 0 : 0.1,
-      delta
+      delta,
     );
 
     easing.damp3(
       ref.current.scale,
       store.openOverlay ? 0.5 : 0.01,
       store.openOverlay ? 0.05 : 0.2,
-      delta
+      delta,
     );
 
     easing.dampC(
       ref.current.material.color,
       store.openOverlay ? "#f0f0f0" : "#ccc",
       0.1,
-      delta
+      delta,
     );
   });
 
@@ -545,7 +545,11 @@ function App() {
                       </Selector>
 
                       {open && (
-                        <Html position={[0, 7, 0]}>
+                        <Html
+                          position={[0, 7, 0]}
+                          zIndexRange={[50, 0]}
+                          style={{ pointerEvents: "none" }}
+                        >
                           <h1
                             className="main__title"
                             style={{
